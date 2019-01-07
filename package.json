@@ -1,0 +1,35 @@
+{
+  "name": "nodethings",
+  "version": "1.0.0",
+  "description": "Ejercicios, basicos y avanzados sobre servidores html, express, rest API, grapQL, MVC, etc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "start_node_basis": "node node_basic/app.js",
+    "auto_restart": "nodemon node_basic/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOURMATADOR/nodethings.git"
+  },
+  "keywords": [
+    "node",
+    "REST",
+    "graphQL",
+    "MVC",
+    "html",
+    "express",
+    "NPM",
+    "heroku"
+  ],
+  "author": "Eduardo Avila (tumatador)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YOURMATADOR/nodethings/issues"
+  },
+  "homepage": "https://github.com/YOURMATADOR/nodethings#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
