@@ -1,13 +1,23 @@
 doctype html  
 html(lang='en')  
   head
-    title Pug
+link(rel="stylesheet" 
+  href="css/lista.css")
+link(rel="stylesheet" 
+  href="css/main.css")
+title Pug
 body
-  h1 Pug Examples
-  div.container
-    ul
+  header.main-header
+    nav.main-header-item--nav
+    ul.nav-item--list
+      li.list-item
+        a(href="admin/agregarProducto") Agregar un nuevo producto
+      li.list-item
+        a(href="/productos").active Lista de productos
+  div.productos
+    ul.lista-productos
       each val in productos
-        li= val
+        li.lista-productos--item= val
 
-a(href="/") Volver
+
 
