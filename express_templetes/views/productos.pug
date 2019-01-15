@@ -1,0 +1,27 @@
+doctype html  
+html(lang='en')  
+  head
+link(rel="stylesheet" 
+  href="css/lista.css")
+link(rel="stylesheet" 
+  href="css/main.css")
+title Pug
+body
+  header.main-header
+    nav.main-header-item--nav
+    ul.nav-item--list
+      li.list-item
+        a(href="admin/agregarProducto") Agregar un nuevo producto
+      li.list-item
+        a(href="/productos").active Lista de productos
+  div.productos
+    ul.lista-productos
+      if productos.length> 0
+        each val in productos
+          li.lista-productos--item
+            h3.lista-item--title #{val}
+            img.list-item--img(src="https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Ftimedotcom.files.wordpress.com%2F2015%2F06%2F521811839-copy.jpg&w=1000&c=sc&poi=face&q=70", alt="libro")
+            button.lista-item--btn agregar
+      else 
+        h1 No hay productos en el carrito
+
