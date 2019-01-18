@@ -1,19 +1,10 @@
-doctype html  
-html(lang='en')  
-  head
-link(rel="stylesheet" 
-  href="css/lista.css")
-link(rel="stylesheet" 
-  href="css/main.css")
-title Pug
-body
-  header.main-header
-    nav.main-header-item--nav
-    ul.nav-item--list
-      li.list-item
-        a(href="admin/agregarProducto") Agregar un nuevo producto
-      li.list-item
-        a(href="/productos").active Lista de productos
+extends layouts/nav.pug
+
+block styles    
+    link(rel="stylesheet" 
+    href="/css/lista.css")
+    
+block contenido 
   div.productos
     ul.lista-productos
       if productos.length> 0

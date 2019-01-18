@@ -9,7 +9,7 @@ const routes = express.Router()
 let productos = []
 
 routes.get('/agregarProducto',(req,res,next)=> {
-    res.render('agregarProducto')
+    res.render('agregarProducto',{tituloPagina:"Nuevo producto",activeUrl:"/agregarProducto"})
 })
 routes.post('/nuevoproducto',(req,res,next)=> {
     let {producto} = req.body

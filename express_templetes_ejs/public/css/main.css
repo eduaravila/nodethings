@@ -29,8 +29,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7ea3a', end
 }
 .list-item a:hover,
 .list-item a:active,
-.list-item a.active,{
-    color:black;
+.list-item a.active{
+    color:red;
 }
 .contenido{
     width: 100%;

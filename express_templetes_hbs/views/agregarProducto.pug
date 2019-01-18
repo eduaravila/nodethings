@@ -1,0 +1,12 @@
+extends layouts/nav.pug
+
+block styles    
+    link(rel="stylesheet" 
+    href="/css/form.css")
+    
+block contenido 
+    .contenedor-formulario
+        form(action="/admin/nuevoproducto" method="post").formulario
+            label(for="producto").formulario-label Producto
+            input(type="text", name="producto", placeholder="nombre del nuevo producto", required)#producto.formulario-item--input
+            button(type="submit").formulario-item--btn Enviar

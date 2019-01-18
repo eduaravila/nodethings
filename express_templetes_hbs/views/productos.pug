@@ -1,0 +1,18 @@
+extends layouts/nav.pug
+
+block styles    
+    link(rel="stylesheet" 
+    href="/css/lista.css")
+    
+block contenido 
+  div.productos
+    ul.lista-productos
+      if productos.length> 0
+        each val in productos
+          li.lista-productos--item
+            h3.lista-item--title #{val}
+            img.list-item--img(src="https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Ftimedotcom.files.wordpress.com%2F2015%2F06%2F521811839-copy.jpg&w=1000&c=sc&poi=face&q=70", alt="libro")
+            button.lista-item--btn agregar
+      else 
+        h1 No hay productos en el carrito
+
