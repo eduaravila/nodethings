@@ -1,0 +1,22 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/nav.ejs') %>
+<div class="productos">
+    <% if(largo) { %>
+    <ul class="lista-productos">
+        <% for(let producto = 0; producto < productos.length; producto++){ %> 
+        <li class="lista-productos--item">
+            <h3 class="lista-item--title"> <%= productos[producto] %> </h3>
+            <img src="https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Ftimedotcom.files.wordpress.com%2F2015%2F06%2F521811839-copy.jpg&w=1000&c=sc&poi=face&q=70"
+                alt="libro" class="list-item--img">
+            <button class="lista-item--btnn">Agregar</button>
+        </li>
+        <% }  %>
+    </ul>
+        <% } else {%>
+            
+        <h1>No hay productos en el catalogo</h1>
+        
+        <% }  %>
+    
+</div>
+<%- include('includes/end.ejs') %>

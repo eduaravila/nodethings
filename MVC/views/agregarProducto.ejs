@@ -1,0 +1,11 @@
+<%- include('includes/head.ejs') %>
+
+<%- include('includes/nav.ejs') %>
+        <div class="contenedor-formulario">
+    <form action="/admin/nuevoproducto" method="post" class="formulario">
+        <label for="producto" class="formulario-label">Producto</label>
+    <input type="text" name="producto" id="producto" placeholder="nombre del nuevo producto" required class="formulario-item--input"> 
+<button type="submit" class="formulario-item--btn">Enviar</button>
+    </form>
+</div>
+<%- include('includes/end.ejs') %>
