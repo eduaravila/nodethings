@@ -1,8 +1,8 @@
 <%- include('includes/head.ejs') %>
 <%- include('includes/nav.ejs') %>
 <div class="productos">
-    <% if(largo) { %>
-    <ul class="lista-productos">
+    <% if(productos.length>0) { %>
+    <ul class="lista-productos">        
         <% for(let producto = 0; producto < productos.length; producto++){ %> 
         <li class="lista-productos--item">
             <h3 class="lista-item--title"> <%= productos[producto] %> </h3>
