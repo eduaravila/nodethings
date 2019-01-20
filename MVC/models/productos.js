@@ -37,6 +37,9 @@ class Producto {
 			}
 		)
 	}
+	obtenerProducto(nombre){
+		return filter.this.productos(i=> i.nombre === nombre)
+	}
 }
 
 module.exports = {

@@ -2,8 +2,11 @@
         <header class="main-header">
             <nav class="main-header-item--nav">
         <ul class="nav-item--list">
-            <li class="list-item"><a href="/admin/agregarProducto" class="<%= !!agregarProducto ? 'active' : ''; %>">Agregar un nuevo producto</a></li>
-            <li class="list-item"><a href="/productos" class="<%= !!producto ? 'active' : ''%>">Lista de productos</a></l>
+            <li class="list-item"><a href="/" class="<%= path=='/' ? 'active' : ''; %>">Home</a></li>
+            <li class="list-item"><a href="/productos" class="<%= path=='/productos' ? 'active' : ''%>">Lista de productos</a></l>
+            <li class="list-item"><a href="/carrito" class="<%= path=='/carrito' ? 'active' : ''%>">Carrito</a></l>
+            <li class="list-item"><a href="/admin/productos" class="<%= path=='/admin/productos' ? 'active' : ''%>">Mis productos</a></l>
+            <li class="list-item"><a href="/admin/agregar" class="<%= path=='/admin/agregar' ? 'active' : ''%>">Agregar producto</a></l>
         </ul>
     </nav>
     </header>

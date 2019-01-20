@@ -2,7 +2,7 @@
 const express = require('express')
 const path = require('path')
 
-const controller_productos  = require('../controllers/productos')
+const controller_productos  = require('../controllers/users/productos')
 const routes = express.Router()
 
 

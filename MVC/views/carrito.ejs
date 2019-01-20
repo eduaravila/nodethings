@@ -1,0 +1,23 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/nav.ejs') %>
+<form class="productos" method=POST action= '/realizarcompra'>
+    <% if(productos.length>0) { %>
+    <ul class="lista-carrito">        
+        <% for(let producto = 0; producto < productos.length; producto++){ %> 
+        <li class="lista-carrito--item">
+            <h3 class="lista-item--title" name="<%= productos[producto] %>" </h3> <%= productos[producto] %> </h3>
+
+            <label for="cantidad-<%= productos[producto] %>">Cantidad <input type="number" name="cantidad-<%= productos[producto] %>" id="cantidad-<%= productos[producto] %>" min=0 class="lista-item--cantidad"></label>
+            
+            <button class="lista-item--btn-eliminar" type="button" onclick="(e)=>e.preventDefault()">Eliminar</button>
+        </li>
+        <% }  %>
+    </ul>
+        <% } else {%>
+            
+        <h1><a href="/productos" class="link-volver">Agregar productos a el carrito</a></h1>
+        
+        <% }  %>
+    <input type="submit" value="Comprar!" class="productos-item--btn-compra">
+        </form>
+<%- include('includes/end.ejs') %>

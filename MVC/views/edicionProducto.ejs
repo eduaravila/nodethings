@@ -5,11 +5,11 @@
             <h1>Agregar un nuevo producto</h1>
     <form action="/admin/nuevoproducto" method="post" class="formulario">
         <label for="producto" class="formulario-label">Nombre</label>
-    <input type="text" name="nombre" id="producto" placeholder="nombre del nuevo producto" required class="formulario-item--input"> 
+    <input type="text" name="nombre" id="producto" placeholder="nombre del nuevo producto" value="<%= nombre%>" required class="formulario-item--input"> 
         <label for="cantidad" class="formulario-label">Disponibles</label>
-    <input type="number" min=0 name="cantidad" id="disponibles" placeholder="Disponibles" required class="formulario-item--input"> 
+    <input type="number" min=0 name="cantidad" id="disponibles" placeholder="Disponibles" value="<%= cantidad%>" required class="formulario-item--input"> 
         <label for="imagen" class="formulario-label">Imagen</label>
-    <input type="text" name="imagen" id="imagen" placeholder="link de la imagen de portada" required class="formulario-item--input"> 
+    <input type="text" name="imagen" id="imagen" placeholder="link de la imagen de portada" value="<%= imagen%>"required class="formulario-item--input"> 
 <button type="submit" class="formulario-item--btn">Enviar</button>
     </form>
 </div>
