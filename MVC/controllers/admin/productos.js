@@ -7,9 +7,9 @@ const getAgregarProducto = (req,res,next)=> {
 }
 
 const postNuevoProducto = (req,res,next)=> {
-    let {nombre,cantidad,imagen} = req.body
+    let {nombre,cantidad,imagen,precio} = req.body
     
-    productos.agregarProducto({nombre,cantidad,imagen})
+    productos.agregarProducto({nombre,cantidad,imagen,precio})
     
     // exports.productos=productos; // * volver a exportar el arreglo para ver los cambios al agregar un nuevo producto con el formualario
     res.redirect('/')  

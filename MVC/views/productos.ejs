@@ -6,10 +6,16 @@
         <% for(let producto = 0; producto < productos.length; producto++){ %> 
         <li class="lista-productos--item">
             <h3 class="lista-item--title"> <%= productos[producto].nombre %> </h3>
-            <img src="https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Ftimedotcom.files.wordpress.com%2F2015%2F06%2F521811839-copy.jpg&w=1000&c=sc&poi=face&q=70"
-                alt="libro" class="list-item--img">
-                <b>Disponibles <%= productos[producto].cantidad %> </b>
-            <button class="lista-item--btnn">Agregar</button>
+            <img src="<%= productos[producto].imagen %>"
+                alt="<%= productos[producto].nombre%>" class="list-item--img">
+                <span class="lista-item--conjunto"> 
+                <small>Disponibles <%= productos[producto].cantidad %> </small>
+                <b> Precio <%= productos[producto].precio %></b>
+            </span>
+                <span class="lista-item--conjunto">
+            <a href='/producto/comprar/<%= productos[producto].id%>' class="lista-item--btn">Agregar</a>
+            <a href="/producto/<%= productos[producto].id%>" class="lista-item--btn">Descripcion</a>
+        </span> 
         </li>
         <% }  %>
     </ul>

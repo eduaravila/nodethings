@@ -23,18 +23,24 @@
     border: 1px solid grey;
     font-family: sans-serif;
     font-size: 1.5rem;
-    margin:1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-around; */
+    /* justify-content: space-around; */
+    margin: 1rem;
+    width:25%;
     box-shadow: grey 7px 8px 5px;
     border-radius: 5px;
-    flex:.1 .1 25%;
+    height: 40vh
 }
 
 .lista-productos--item:hover{
   box-shadow:none;
 }
 .list-item--img {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
+    max-height: 30%;
 }
 .lista-item--btn{
   color:#3737b7;
@@ -44,8 +50,13 @@
     padding:.5rem;
     margin:.5rem auto;
     width:30%;
+    outline: none;
+    text-decoration: none;
 }
 .lista-item--titulo{
     border:none;
     font-size:1.5rem;
+}
+.lista-item--conjunto{
+    margin:1rem;
 }

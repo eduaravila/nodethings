@@ -24,6 +24,7 @@ app.use(productos)
 app.use(carrito.routes)
 app.use(editarProducto)
 
+
 app.use((req,res,next)=> {
     res.render('404', {tituloPagina:"404!",path:'/404'})
 })

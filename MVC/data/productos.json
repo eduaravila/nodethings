@@ -1,1 +1,30 @@
-[{"nombre":"coca","cantidad":10},{"nombre":"pepsi-cola","cantidad":15},{"nombre":"nuevo","cantidad":"90","imagen":"nn"}]
+[
+	{
+		"nombre": "coca",
+		"precio": "12",
+		"cantidad": "30",
+		"imagen": "https://www.coca-colaentuhogar.com/media/catalog/product/cache/image/585x683/e9c3970ab036de70892d86c6d221abfe/1/6/160_coca-cola-355-ml-botella-vidrio-24p.jpg",
+		"id": 0.070013907467948
+	},
+	{
+		"nombre": "Coca cola ",
+		"precio": "30",
+		"cantidad": "50",
+		"imagen": "https://www.coca-colaentuhogar.com/media/catalog/product/cache/image/585x683/e9c3970ab036de70892d86c6d221abfe/1/6/160_coca-cola-355-ml-botella-vidrio-24p.jpg",
+		"id": 0.1749146355378386
+	},
+	{
+		"nombre": "Coca cola ",
+		"precio": "90",
+		"cantidad": "50",
+		"imagen": "h",
+		"id": 0.9538954063481806
+	},
+	{
+		"nombre": "Coca cola ",
+		"precio": "50",
+		"cantidad": "45",
+		"imagen": "https://www.coca-colaentuhogar.com/media/catalog/product/cache/image/585x683/e9c3970ab036de70892d86c6d221abfe/1/6/160_coca-cola-355-ml-botella-vidrio-24p.jpg",
+		"id": 0.5012550746511066
+	}
+]

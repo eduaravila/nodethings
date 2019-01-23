@@ -27,8 +27,8 @@ class Producto {
 		return this.productos
 	}
 
-	agregarProducto(producto) {
-		this.productos.push(producto)
+	agregarProducto({nombre,precio,cantidad,imagen}) {
+		this.productos.push({nombre,precio,cantidad,imagen,id:Math.random()})
 		fs.writeFile(
 			path.join(rootPath, 'data', 'productos.json'),
 			JSON.stringify(this.productos),
@@ -37,8 +37,10 @@ class Producto {
 			}
 		)
 	}
-	obtenerProducto(nombre){
-		return filter.this.productos(i=> i.nombre === nombre)
+	obtenerProducto(id,cb){
+		
+		
+		 cb(this.productos.find(i=> i.id == id))
 	}
 }
 
