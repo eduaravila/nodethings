@@ -11,9 +11,6 @@ routes.post('/producto',(req,res,next) => {
     res.redirect(`/producto/?nombre=${req.body.nombre}`)
 })
 
-routes.get('/producto',(req,res,next) => {
-    console.log(req.query);
-    res.render('edicionProducto',{productos:productos.getProductos(),tituloPagina:"Editar Producto",activeUrl:"/admin/misproductos", path:'/productos'})
-})
+// routes.get('/producto',controller_productos.edicionProducto)
 
 module.exports=routes

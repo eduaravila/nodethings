@@ -1,0 +1,18 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/nav.ejs') %>
+<main class="producto">
+        <h3 class="producto-item--title"> <%= producto.nombre %> </h3>
+        <img src="<%= producto.imagen %>"
+            alt="<%= producto.nombre%>" class="producto-item--img">
+            <span class="producto-item--conjunto"> 
+            <small>Disponibles <%= producto.cantidad %> </small>
+            <b> Precio <%= producto.precio %></b>
+        </span>
+            <span class="producto-item--conjunto">
+        <a href='/producto/comprar/<%= producto.id%>' class="producto-item--btn">Agregar a el carrito</a>
+        
+    </span> 
+    
+</main>
+<%- include('includes/end.ejs') %>
+

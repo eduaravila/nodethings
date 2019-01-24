@@ -2,6 +2,32 @@ body{
     padding:0;
     margin:0;
 }
+.producto{
+    text-align: center;
+    width: 100%;
+    display: flex;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.producto-item--conjunto{
+    margin-top:10px;
+}
+.producto-item--img{
+        max-width: 100%;
+        max-height: 80%;
+}
+.producto-item--btn{
+    color:#3737b7;
+    background: white;
+    border:1px solid #3737b7;
+    border-radius: 5px;
+    padding:.5rem;
+    margin:.5rem auto;
+    width:30%;
+    text-decoration: none;
+}
 .main-header{
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e7ea3a+13,3737b7+87 */
 background: #e7ea3a; /* Old browsers */

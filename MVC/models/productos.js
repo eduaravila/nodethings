@@ -5,6 +5,7 @@ const rootPath = require('../helpers/rootPath')
 
 class Producto {
 	constructor() {
+		this.imagenDefecto ="https://upload.wikimedia.org/wikipedia/commons/f/f0/GHS-pictogram-unknown.svg"
 		fs.readFile(path.join(rootPath, 'data', 'productos.json'), (err, res) => {
 			if (err) {
 				this.productos = []
@@ -28,6 +29,7 @@ class Producto {
 	}
 
 	agregarProducto({nombre,precio,cantidad,imagen}) {
+		imagen = !!imagen ? imagen : this.imagenDefecto;
 		this.productos.push({nombre,precio,cantidad,imagen,id:Math.random()})
 		fs.writeFile(
 			path.join(rootPath, 'data', 'productos.json'),
