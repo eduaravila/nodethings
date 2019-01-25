@@ -15,7 +15,7 @@ class Producto {
 						!error &&
 						fs.writeFile(
 							path.join(rootPath, 'data', 'productos.json'),
-							[],
+							'[]',
 							(e, r) => !!e && console.log('erro', e)
 						)
 				)
