@@ -13,7 +13,7 @@
                 <b> Precio <%= productos[producto].precio %></b>
             </span>
                 <span class="lista-item--conjunto">
-            <a href='/producto/comprar/<%= productos[producto].id%>' class="lista-item--btn">Agregar</a>
+        <%- include('includes/comprar.ejs',{id:productos[producto].id})%>
             <a href="/producto/<%= productos[producto].id%>" class="lista-item--btn">Descripcion</a>
         </span> 
         </li>
