@@ -3,9 +3,13 @@
     display:flex;
     justify-content: center;
 }
+
 .contenedor-formulario{
     
     margin:2rem auto;
+}
+.contenedor-formulario h1{
+    text-align: center;
 }
 .formulario{
     width:80%;

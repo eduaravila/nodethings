@@ -2,16 +2,22 @@ const Producto = require('../../models/productos').Producto
 const productos = new Producto()
 
 const getAgregarProducto = (req, res, next) => {
-	res.render('agregarProducto', {
+	res.render('editarProducto', {
 		tituloPagina: 'Nuevo producto',
 		activeUrl: '/agregarProducto',
-		path: '/admin/agregar'
+		path: '/admin/agregar',
+		editar: false,
+		nombre: "",
+		precio: "",
+		cantidad: "",
+		imagen: "",
+		id:""
 	})
 }
 
 const postNuevoProducto = (req, res, next) => {
 	let { nombre, cantidad, imagen, precio } = req.body
-console.log("nueiv",imagen);
+	console.log('nueiv', imagen)
 
 	productos.agregarProducto({ nombre, cantidad, imagen, precio })
 
@@ -19,12 +25,22 @@ console.log("nueiv",imagen);
 	res.redirect('/')
 }
 const edicionProducto = (req, res, next) => {
-	console.log(req.query)
-	res.render('edicionProducto', {
-		productos: productos.getProductos(),
-		tituloPagina: 'Editar Producto',
-		activeUrl: '/admin/misproductos',
-		path: '/productos'
+	let { id } = req.params
+	let { editar } = req.query
+	console.log('query, id',id,editar);
+	
+	productos.obtenerProducto(+id, (resultado) => {
+		res.render('editarProducto', {
+			tituloPagina: 'Editar Producto',
+			activeUrl: '/admin/misproductos',
+			path: '/admin/agregar',
+			editar,
+			nombre: resultado.nombre,
+			precio: resultado.precio,
+			cantidad: resultado.cantidad,
+			imagen: resultado.imagen,
+			id:resultado.id
+		})
 	})
 }
 const detallesProducto = (req, res, next) => {
