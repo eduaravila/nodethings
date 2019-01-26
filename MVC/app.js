@@ -19,10 +19,10 @@ app.use(bodyP.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,'public')))
 app.use('/admin',agregarProducto.routes)
 app.use('/admin',misProductos.routes)
+app.use('/admin',editarProducto)
 app.use(index)
 app.use(productos)
 app.use(carrito.routes)
-app.use(editarProducto)
 
 
 app.use((req,res,next)=> {

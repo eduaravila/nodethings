@@ -1,7 +1,7 @@
 <%- include('includes/head.ejs') %> <%- include('includes/nav.ejs') %>
 <div class="contenedor-formulario">
 	<h1>Agregar un nuevo producto</h1>
-	<form action="<%= editar =='true' ? '/admin/actualizar/'+id : '/admin/nuevoproducto' %>" method="post" class="formulario">
+	<form action="<%= editar =='true' ? '/admin/actualizar/' : '/admin/nuevoproducto' %>" method="post" class="formulario">
 		<label for="producto" class="formulario-label">Nombre</label>
 		<input
 			type="text"
@@ -44,6 +44,11 @@
 			value="<%= imagen%>"
 			class="formulario-item--input"
 		/>
+		<input type="text" name="id" id="id" value="<%=id%>" hidden>
+		<% if(editar=="true"){%>
+			<button type="submit" class="formulario-item--btn">Actualizar</button>
+			<%}else{%>
 		<button type="submit" class="formulario-item--btn">Enviar</button>
+		<%}%>
 	</form>
 </div>

@@ -28,21 +28,65 @@ class Producto {
 		return this.productos
 	}
 
-	agregarProducto({nombre,precio,cantidad,imagen}) {
+	agregarProducto({id,nombre,precio,cantidad,imagen},cb) {
+		if(id){
+			let indiceProducto = this.productos.findIndex(i => i.id == id )
+		 	this.productos[indiceProducto] = {id,nombre,precio,cantidad,imagen}
+			 fs.writeFile(
+				path.join(rootPath, 'data', 'productos.json'),
+				JSON.stringify(this.productos),
+				(e, r) => {
+					if(e)
+					{
+						console.log('error', e)
+					}
+					else
+					{
+						cb({mensaje:"Exito al grabar el producto"})
+					}
+				}
+			)
+		}
+		else{
 		imagen = !!imagen ? imagen : this.imagenDefecto;
 		this.productos.push({nombre,precio,cantidad,imagen,id:Math.random()})
 		fs.writeFile(
 			path.join(rootPath, 'data', 'productos.json'),
 			JSON.stringify(this.productos),
 			(e, r) => {
-				console.log('error', e)
+				if(e)
+				{
+					console.log('error', e)
+				}
+				else
+				{
+					cb({mensaje:"Exito al grabar el producto"})
+				}
 			}
 		)
+		}
 	}
 	obtenerProducto(id,cb){
 		
 		
 		 cb(this.productos.find(i=> i.id == id))
+	}
+	eliminarProducto(id,cb){
+		this.productos = [...this.productos.filter(i => i.id != id)]
+		fs.writeFile(
+			path.join(rootPath, 'data', 'productos.json'),
+			JSON.stringify(this.productos),
+			(e, r) => {
+				if(e)
+				{
+					console.log('error', e)
+				}
+				else
+				{
+					cb({mensaje:"Exito al eliminar el producto"})
+				}
+			}
+		)
 	}
 }
 

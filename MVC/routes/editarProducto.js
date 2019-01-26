@@ -6,6 +6,7 @@ const routes = express.Router()
 
 
 routes.get('/producto/editar/:id',controller_productos.edicionProducto)
+routes.post('/actualizar/',controller_productos.postActualizarProducto)
 
 // routes.get('/producto',controller_productos.edicionProducto)
 

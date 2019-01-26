@@ -6,12 +6,21 @@
         <% for(let producto = 0; producto < productos.length; producto++){ %> 
             
         <li class="lista-productos--item">
-        
+            
+        <div class="lista-productos--header">
             <input readonly value="<%= productos[producto].nombre %>" name="nombre" class='lista-item--titulo'>
-            <img src="https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Ftimedotcom.files.wordpress.com%2F2015%2F06%2F521811839-copy.jpg&w=1000&c=sc&poi=face&q=70"
+
+            <form action="/admin/eliminar" method="post" class="lista-productos--form-eliminar">
+                <input type="text" name="id" hidden value="<%= productos[producto].id %>">
+            <button type="submit" class="formulario-item--btn--eliminar">X</button>
+            </form>
+            
+        </div>
+            <img src="<%= productos[producto].imagen%>"
                 alt="libro" class="list-item--img">
                 <b>Disponibles <%= productos[producto].cantidad %> </b>
-            <a class="lista-item--btnn" href ="/producto/editar/<%=productos[producto].id%>?editar=true">Editar</a>
+                <b>Precio <%= productos[producto].precio %> </b>
+            <a class="lista-item--btnn" href ="/admin/producto/editar/<%=productos[producto].id%>?editar=true">Editar</a>
         
         </li>
         
