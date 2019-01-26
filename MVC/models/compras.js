@@ -60,7 +60,7 @@ class Compra {
 				} else {
 					existente = { id: producto.id, qty: 1 }
 					this.compras = [...this.compras, existente]
-
+					
 					this.total = +this.total + +producto.precio
 					this.total = (this.total).toFixed(2)
 				}
@@ -118,7 +118,7 @@ class Compra {
 
 			this.compras = this.compras.filter(i=> i.id != id)
 
-		this.total -= +totalProducto;
+		this.total =  +this.total - +totalProducto;
 	this.total = (+this.total).toFixed(2)
 		fs.writeFile(
 			path.join(rootPath, 'data', 'compras.json'),

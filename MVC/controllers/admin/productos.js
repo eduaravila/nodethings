@@ -1,5 +1,6 @@
 const Producto = require('../../models/productos').Producto
 const productos = new Producto()
+const compras = require('./compras').compras
 
 const getAgregarProducto = (req, res, next) => {
 	res.render('editarProducto', {
@@ -7,11 +8,11 @@ const getAgregarProducto = (req, res, next) => {
 		activeUrl: '/agregarProducto',
 		path: '/admin/agregar',
 		editar: false,
-		nombre: "",
-		precio: "",
-		cantidad: "",
-		imagen: "",
-		id:""
+		nombre: '',
+		precio: '',
+		cantidad: '',
+		imagen: '',
+		id: ''
 	})
 }
 
@@ -19,10 +20,12 @@ const postNuevoProducto = (req, res, next) => {
 	let { nombre, cantidad, imagen, precio } = req.body
 	console.log('nueiv', imagen)
 
-	productos.agregarProducto({id:null, nombre, cantidad, imagen, precio },(res)=> {
-		console.log(res);
-		
-	})
+	productos.agregarProducto(
+		{ id: null, nombre, cantidad, imagen, precio },
+		(res) => {
+			console.log(res)
+		}
+	)
 
 	// exports.productos=productos; // * volver a exportar el arreglo para ver los cambios al agregar un nuevo producto con el formualario
 	res.redirect('/')
@@ -30,34 +33,35 @@ const postNuevoProducto = (req, res, next) => {
 const edicionProducto = (req, res, next) => {
 	let { id } = req.params
 	let { editar } = req.query
-	console.log('query, id',id,editar);
-	if(editar =="true"){
-	productos.obtenerProducto(+id, (resultado) => {
-		res.render('editarProducto', {
-			tituloPagina: 'Editar Producto',
-			activeUrl: '/admin/misproductos',
-			path: '/admin/agregar',
-			editar,
-			nombre: resultado.nombre,
-			precio: resultado.precio,
-			cantidad: resultado.cantidad,
-			imagen: resultado.imagen,
-			id:resultado.id
+	console.log('query, id', id, editar)
+	if (editar == 'true') {
+		productos.obtenerProducto(+id, (resultado) => {
+			res.render('editarProducto', {
+				tituloPagina: 'Editar Producto',
+				activeUrl: '/admin/misproductos',
+				path: '/admin/agregar',
+				editar,
+				nombre: resultado.nombre,
+				precio: resultado.precio,
+				cantidad: resultado.cantidad,
+				imagen: resultado.imagen,
+				id: resultado.id
+			})
 		})
-	})
-}
-else{
-	res.redirect('/')
-}
+	} else {
+		res.redirect('/')
+	}
 }
 
 const postActualizarProducto = (req, res, next) => {
-	let {id,nombre,cantidad,imagen,precio} = req.body;
-	productos.agregarProducto({id, nombre, cantidad, imagen, precio },(result)=> {
-		console.log(result);
-		res.redirect('/')
-	})
-
+	let { id, nombre, cantidad, imagen, precio } = req.body
+	productos.agregarProducto(
+		{ id, nombre, cantidad, imagen, precio },
+		(result) => {
+			console.log(result)
+			res.redirect('/')
+		}
+	)
 }
 
 const detallesProducto = (req, res, next) => {
@@ -71,6 +75,25 @@ const detallesProducto = (req, res, next) => {
 		})
 	})
 }
+const postEliminarProducto = (req, res, next) => {
+	let { id } = req.body
+
+	compras.eliminarProducto(id, (resul) => {
+		console.log(resul)
+		productos.eliminarProducto(id, (resultado) => {
+			res.redirect('/admin/productos')
+			console.log(resultado)
+		})
+	})
+}
+const getMisProductos = (req, res, next) => {
+	res.render('misProductos', {
+		productos: productos.getProductos(),
+		tituloPagina: 'Mis productos',
+		activeUrl: '/admin/misproductos',
+		path: '/admin/misproductos'
+	})
+}
 
 module.exports = {
 	getAgregarProducto,
@@ -78,5 +101,7 @@ module.exports = {
 	productos,
 	edicionProducto,
 	detallesProducto,
-	postActualizarProducto
+	postActualizarProducto,
+	postEliminarProducto,
+	getMisProductos
 }
