@@ -10,6 +10,8 @@ const agregarProducto = require('./routes/agregarProductos')
 const carrito = require('./routes/carrito')
 const editarProducto = require('./routes/editarProducto')
 const misProductos = require('./routes/misProductos')
+const conexion = require('./db/conexion').conexion
+
 
 const PORT = process.env.PORT || 3000
 
@@ -28,4 +30,8 @@ app.use(carrito.routes)
 app.use((req,res,next)=> {
     res.render('404', {tituloPagina:"404!",path:'/404'})
 })
-app.listen(PORT, () => console.log('escuchando desde el puerto ', PORT))
+
+conexion().then(()=> {
+    app.listen(PORT, () => console.log('escuchando desde el puerto ', PORT))
+})
+
