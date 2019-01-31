@@ -9,7 +9,8 @@ const getAgregarProducto = (req, res, next) => {
 		editar: false,
 		nombre: '',
 		precio: '',
-		cantidad: '',
+		disponibles: '',
+		descripcion:'',
 		imagen: '',
 		id: ''
 	})
@@ -19,7 +20,7 @@ const postNuevoProducto = (req, res, next) => {
 	let { nombre, disponibles,descripcion, imagen, precio } = req.body
 	console.log('nueiv', imagen)
 
-	new producto({ nombre, disponibles, imagen, precio,descripcion}).save()
+	new producto({ nombre, disponibles, imagen, precio,descripcion,autor:req.user._id}).save()
 	.then(()=> console.log('Guardado con exito'))
 
 
@@ -44,7 +45,7 @@ const edicionProducto = async (req, res, next) => {
 				disponibles: resultado.disponibles,
 				imagen: resultado.imagen,
 				descripcion: resultado.descripcion,
-				id: resultado._id
+				id: resultado._id				
 			})
 
 	} else {
@@ -60,7 +61,7 @@ catch(err){
 const postActualizarProducto = async (req, res, next) => {
 	try{
 	let { id, nombre, disponibles, imagen, precio,descripcion} = req.body
-			await producto.updateOne({_id:new objectId(id)},{nombre,disponibles,imagen,precio,descripcion})			
+			await producto.updateOne({_id:new objectId(id)},{nombre,disponibles,imagen,precio,descripcion,autor:req.user._id})			
 			res.redirect('/')
 	}
 	catch(err){
@@ -87,9 +88,10 @@ catch(err){
 
 }
 }
-const postEliminarProducto = (req, res, next) => {
+const postEliminarProducto = async(req, res, next) => {
 	let { id } = req.body
-
+	let resultado = await req.user.traducirCarro   
+	await req.user.eliminarProducto(id,resultado)
 	producto.deleteOne({_id:new objectId(id)}).then(()=> {
 		console.log("Eliminado con exito");
 		res.redirect('/admin/productos')

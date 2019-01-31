@@ -22,6 +22,11 @@ const productosSchema = new Schema({
     descripcion:{
         type:String,
         required:true
+    },
+    autor:{
+        type:mongoose.Types.ObjectId,
+        required:true,
+        ref:"Usuario"
     }
 })
 
