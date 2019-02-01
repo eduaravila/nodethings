@@ -47,7 +47,10 @@
     width:30%;
 }
 
-
+.pedidos-item--fechas{
+    display: flex;
+    justify-content: space-around;
+}
 .productos-item--btn-compra{
     color:#1bc55c;
     background: white;

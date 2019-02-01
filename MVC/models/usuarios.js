@@ -49,6 +49,11 @@ usuariosSchema.virtual('traducirCarro').get(async function() {
 		return []
 	}
 })
+usuariosSchema.methods.limpiarCarrito = function(){
+	this.carrito.items = []
+	this.carrito.total = 0
+	return this.save()
+}
 usuariosSchema.methods.eliminarProducto =function(id,resultado){	
 		console.log('resultado',resultado,'id',id);
 		

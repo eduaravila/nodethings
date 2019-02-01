@@ -1,0 +1,32 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/nav.ejs') %>
+    <div class="productos">
+        <% if(pedidos.length >0){%>
+            <%for(let pedido = 0; pedido < pedidos.length;pedido++){%>
+                <% if(pedidos[pedido].productos.length>0) { %>
+                    <ul class="lista-carrito">        
+                        <% for(let producto = 0; producto < pedidos[pedido].productos.length; producto++){ %> 
+                        <li class="lista-carrito--item">
+                            <h3 class="lista-item--title" name="<%= pedidos[pedido].productos[producto].nombre %>" </h3> <%= pedidos[pedido].productos[producto].nombre %> </h3>
+                
+                            <label for="cantidad-<%= pedidos[pedido].productos[producto].qty %>">Cantidad <input type="number" disabled name="cantidad-<%= pedidos[pedido].productos[producto].qty %>" id="cantidad-<%= pedidos[pedido].productos[producto].qty %>" value="<%=pedidos[pedido].productos[producto].qty%>" min=0 class="lista-item--cantidad"></label>
+                          
+                        </li>
+                        <% }  %>
+                    </ul>                                
+                        <% } %>
+                        <div class="pedidos-item--fechas">
+                                <h3>Inicio <%= moment(pedidos[pedido].inicio).locale("es").format('MM-DD-YYYY') %></h3>
+                                <h3>Estimado <%= moment(pedidos[pedido].fin).add(7,"days").locale("es").format('MM-DD-YYYY') %></h3>
+                            </div>
+            <%}%>
+           
+            <br>
+        <%}else{%>
+        <h1>Aun no hay pedidos,</h1>
+        <a href="/productos">Agregar productos a mi carrito</a>
+        <%}%>
+   
+      
+    </div>   
+<%- include('includes/end.ejs') %>

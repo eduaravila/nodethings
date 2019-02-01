@@ -1,4 +1,5 @@
 const producto = require('../../models/productos').productos
+
 // const compras = require('./compras').compras
 const objectId = require('mongodb').ObjectID
 const getAgregarProducto = (req, res, next) => {
