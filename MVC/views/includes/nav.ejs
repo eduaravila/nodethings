@@ -3,11 +3,14 @@
             <nav class="main-header-item--nav">
         <ul class="nav-item--list">
             <li class="list-item"><a href="/" class="<%= path=='/' ? 'active' : ''; %>">Home</a></li>
-            <li class="list-item"><a href="/productos" class="<%= path=='/productos' ? 'active' : ''%>">Lista de productos</a></l>
-            <li class="list-item"><a href="/carrito" class="<%= path=='/carrito' ? 'active' : ''%>">Carrito</a></l>
-            <li class="list-item"><a href="/admin/productos" class="<%= path=='/admin/misproductos' ? 'active' : ''%>">Mis productos</a></l>
-            <li class="list-item"><a href="/admin/agregar" class="<%= path=='/admin/agregar' ? 'active' : ''%>">Agregar producto</a></l>
-            <li class="list-item"><a href="/pedidos" class="<%= path=='/pedidos' ? 'active' : ''%>">Mis pedidos</a></l>
+            <li class="list-item"><a href="/tienda/productos" class="<%= path=='/productos' ? 'active' : ''%>">Lista de productos</a></l>
+            <li class="list-item"><a href="/tienda/carrito" class="<%= path=='/carrito' ? 'active' : ''%>">Carrito</a></l>
+            <li class="list-item"><a href="/tienda/admin/productos" class="<%= path=='/admin/misproductos' ? 'active' : ''%>">Mis productos</a></l>
+            <li class="list-item"><a href="/tienda/admin/agregar" class="<%= path=='/admin/agregar' ? 'active' : ''%>">Agregar producto</a></l>
+            <li class="list-item"><a href="/tienda/pedidos" class="<%= path=='/pedidos' ? 'active' : ''%>">Mis pedidos</a></l>
+        </ul>
+        <ul class="list-login">
+            <li class="list-item"><a href="/login" class="<%= path=='/login' ? 'active' : ''%>">Login</a></l>
         </ul>
     </nav>
     </header>

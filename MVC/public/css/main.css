@@ -2,6 +2,14 @@ body{
     padding:0;
     margin:0;
 }
+.main-header-item--nav{
+    display: flex;    
+}
+.list-login{
+    list-style: none;
+    padding:0;
+    margin:0;
+}
 .producto{
     text-align: center;
     width: 100%;
@@ -40,6 +48,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7ea3a', end
     margin:0;
     list-style: none;
     padding:0;
+    flex:1;
     display:flex;
 }
 .list-item{
@@ -59,9 +68,32 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7ea3a', end
     color:red;
 }
 .contenido{
-    width: 100%;
-    display:flex;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+.card {
+    width: 15%;
+    padding: 5px;
+    text-align: center;
+    display: grid;
+    justify-items: stretch;
+    justify-content: center;
+    grid-template-columns: [izquierda] 10% [centro] 80% [derecha] 10%;
+    border-radius: 1rem;
+    border: 1px solid black;
+}
+.card-title{
+    grid-column-start: centro;
+    grid-column-end: derecha;
+}
+.form-login{
+    grid-row-start: 3;
+    grid-column-start: centro;
+    grid-column-end: derecha;
+    display: flex;
+    flex-direction: column;
 }
 
 
