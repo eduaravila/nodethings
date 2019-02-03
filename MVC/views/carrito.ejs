@@ -8,7 +8,7 @@
             <h3 class="lista-item--title" name="<%= productos[producto].nombre %>" </h3> <%= productos[producto].nombre %> </h3>
 
             <label for="cantidad-<%= productos[producto].qty %>">Cantidad <input type="number" name="cantidad-<%= productos[producto].qty %>" id="cantidad-<%= productos[producto].qty %>" value="<%=productos[producto].qty%>" min=0 class="lista-item--cantidad"></label>
-            <form action="/carrito/eliminar" method="post">
+            <form action="/tienda/carrito/eliminar" method="post">
                 <input type="text" hidden name="id" value="<%=productos[producto].id%>">
                 <button class="lista-item--btn-eliminar" type="submit">Eliminar</button>
             </form>
@@ -16,12 +16,12 @@
         <% }  %>
     </ul>
     <h3>Total <%=total%></h3>
-    <form class="productos" method=POST action= '/realizarcompra'>
+    <form class="productos" method=POST action= '/tienda/realizarcompra'>
 <input type="submit" value="Comprar!" class="productos-item--btn-compra">
     </form>
         <% } else {%>
             
-        <h1><a href="/productos" class="link-volver">Agregar productos a el carrito</a></h1>
+        <h1><a href="/tienda/productos" class="link-volver">Agregar productos a el carrito</a></h1>
         
         <% }  %>
       

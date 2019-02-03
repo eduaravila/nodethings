@@ -19,7 +19,7 @@ const getAgregarProducto = (req, res, next) => {
 
 const postNuevoProducto = (req, res, next) => {
 	let { nombre, disponibles,descripcion, imagen, precio } = req.body
-	console.log('nueiv', imagen)
+	
 
 	new producto({ nombre, disponibles, imagen, precio,descripcion,autor:req.user._id}).save()
 	.then(()=> console.log('Guardado con exito'))
@@ -32,7 +32,7 @@ const edicionProducto = async (req, res, next) => {
 	try{
 	let { id } = req.params
 	let { editar } = req.query
-	console.log('query, id', id, editar)
+	
 	if (editar == 'true') {
 
 		let resultado = await producto.findOne({_id:new objectId(id)})

@@ -10,7 +10,7 @@
         <div class="lista-productos--header">
             <input readonly value="<%= productos[producto].nombre %>" name="nombre" class='lista-item--titulo'>
 
-            <form action="/admin/eliminar" method="post" class="lista-productos--form-eliminar">
+            <form action="/tienda/admin/eliminar" method="post" class="lista-productos--form-eliminar">
                 <input type="text" name="id" hidden value="<%= productos[producto]._id %>">
             <button type="submit" class="formulario-item--btn--eliminar">X</button>
             </form>
@@ -23,7 +23,7 @@
                 <b>Disponibles <%= productos[producto].disponibles %> </b>
                 <hr>
                 <b>Precio <%= productos[producto].precio %> </b>
-            <a class="lista-item--btnn" href ="/admin/producto/editar/<%=productos[producto].id%>?editar=true">Editar</a>
+            <a class="lista-item--btnn" href ="/tienda/admin/producto/editar/<%=productos[producto].id%>?editar=true">Editar</a>
         
         </li>
         

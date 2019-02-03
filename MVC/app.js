@@ -6,6 +6,7 @@ const ejs = require('ejs')
 const usuario = require('./models/usuarios').usuarios
 const cp = require('cookie-parser')
 
+
 const index = require('./routes/index')
 const login = require('./routes/login')
 const productos = require('./routes/listaProductos')
@@ -14,7 +15,7 @@ const carrito = require('./routes/carrito')
 const editarProducto = require('./routes/editarProducto')
 const misProductos = require('./routes/misProductos')
 const conexion = require('./db/conexion').conexion
-
+const jwt_helper = require('./helpers/jwt')
 const PORT = process.env.PORT || 3000
 
 let userEduardo = new usuario({
@@ -43,9 +44,15 @@ app.use(async (req, res, next) => {
     next()
 })
 
-app.use('/tienda/*',(req,res,next) => {
+app.use('/tienda/*',async (req,res,next) => {
+	try{
 	let sesion = !!req.cookies.usuario && req.cookies.usuario;		
-	if(sesion.logeado){
+	console.log(sesion);
+	
+	let {logeado} = await jwt_helper.desifrarToken(sesion)
+	
+	
+	if(logeado){
 		console.log('Logeado');
 		
 		next()
@@ -55,6 +62,11 @@ app.use('/tienda/*',(req,res,next) => {
 		res.redirect('/login')
 		
 	}
+}
+catch(err){
+	console.log(err);
+	
+}
 })
 
 app.set('view engine', 'ejs')

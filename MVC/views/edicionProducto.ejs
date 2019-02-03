@@ -3,7 +3,7 @@
 <%- include('includes/nav.ejs') %>
         <div class="contenedor-formulario">
             <h1>Agregar un nuevo producto</h1>
-    <form action="/admin/nuevoproducto" method="post" class="formulario">
+    <form action="/tienda/admin/nuevoproducto" method="post" class="formulario">
         <label for="producto" class="formulario-label">Nombre</label>
     <input type="text" name="nombre" id="producto" placeholder="nombre del nuevo producto" value="<%= nombre%>" required class="formulario-item--input"> 
         <label for="cantidad" class="formulario-label">Disponibles</label>

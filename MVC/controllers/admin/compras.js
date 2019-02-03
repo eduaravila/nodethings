@@ -4,9 +4,9 @@ const moment = require('moment')
 
 const getCarrito = async (req, res, next) => {
 	let total = req.user.carrito.total;
-    console.log(total);
+    
     let resultado = await req.user.traducirCarro
-    console.log(resultado);
+    
     
 		if (!resultado) {
 			res.render('carrito', {
@@ -41,7 +41,7 @@ const postRealizarCompra = async (req, res, next) => {
     try{
     
 	let resultado = await req.user.traducirCarro
-	   console.log(req.user);
+	   
 	   
 	await new pedidos({usuario:req.user._id, productos:resultado,inicio:new Date(),fin:new Date()}).save()
 	
@@ -57,7 +57,7 @@ const postRealizarCompra = async (req, res, next) => {
 const postCarrito = async (req, res, next) => {
     try{
     let { id } = req.body
-    console.log('id',id);
+    
     
     await req.user.agregarCarro(id)
     res.redirect('/');
@@ -70,7 +70,7 @@ const postCarrito = async (req, res, next) => {
 const getPedidos = async (req,res,next) => {
 	try{
 		let resultado  = await pedidos.find({usuario:req.user._id})
-		console.log('Pedidos',resultado);
+		
 		res.render('pedidos',{
 			pedidos:resultado,			
 			path: '/pedidos',							

@@ -7,6 +7,7 @@ const routes = express.Router()
 
 
 routes.get('/login',login_controler.getLogin)
+routes.get('/',login_controler.getLogin)
 routes.post('/login',login_controler.postLogin)
 
 
