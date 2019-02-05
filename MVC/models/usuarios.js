@@ -2,13 +2,18 @@ const mongoose = require('mongoose')
 const productos = require('./productos').productos
 const Schema = mongoose.Schema
 const usuariosSchema = new mongoose.Schema({
-	alias: {
+	usuario: {
+		type: String,
+		required: true,
+		unique:true
+	},
+	correo: {
 		type: String,
 		required: true
 	},
-	mail: {
-		type: String,
-		required: true
+	contraseña:{
+		type:String,
+		required:true
 	},
 	carrito: {
 		items: {
@@ -21,11 +26,13 @@ const usuariosSchema = new mongoose.Schema({
 		},
 		caduca: {
 			type: Date,
-			required: true
+			required: true,
+			default:0
 		},
 		total: {
 			type: Number,
-			required: true
+			required: true,
+			default:0
 		}
 	}
 })

@@ -9,6 +9,7 @@ const cp = require('cookie-parser')
 
 const index = require('./routes/index')
 const login = require('./routes/login')
+const registro = require('./routes/registro')
 const productos = require('./routes/listaProductos')
 const agregarProducto = require('./routes/agregarProductos')
 const carrito = require('./routes/carrito')
@@ -16,6 +17,7 @@ const editarProducto = require('./routes/editarProducto')
 const misProductos = require('./routes/misProductos')
 const conexion = require('./db/conexion').conexion
 const jwt_helper = require('./helpers/jwt')
+const sesion_model = require('./models/sesion')
 const PORT = process.env.PORT || 3000
 
 let userEduardo = new usuario({
@@ -28,45 +30,29 @@ let userEduardo = new usuario({
 })
 app.use(cp()) // * cookie parser
 
-app.use(async (req, res, next) => {
-	try {                
-        let user = await usuario.findById('5c5250d07806b905d8430c69')
-        if(!user){
-             await userEduardo.save()
-             req.user = user
-        }
-        else{
-            req.user = user
-        }		
-	} catch (err) {
-		console.log(err)
-    }
-    next()
-})
 
 app.use('/tienda/*',async (req,res,next) => {
-	try{
-	let sesion = !!req.cookies.usuario && req.cookies.usuario;		
-	console.log(sesion);
-	
-	let {logeado} = await jwt_helper.desifrarToken(sesion)
-	
-	
-	if(logeado){
-		console.log('Logeado');
+	try {                
+		let token = req.cookies.sesion;
+		console.log(token);
 		
-		next()
-	}
-	else{
-		console.log('Invalido');
-		res.redirect('/login')
+		let usuario = await jwt_helper.desifrarToken(token);
+		console.log('usuario',usuario);
+		let sesion = await sesion_model.findOne({usuario:usuario.user._id})
+		console.log('sesion',sesion);
 		
+		if(sesion){
+			console.log(sesion);
+			next();
+		}
+		else{
+			res.redirect('/login')
+		}
 	}
-}
-catch(err){
-	console.log(err);
-	
-}
+		catch(err){
+			console.log(err);
+			res.redirect('/login')
+		}
 })
 
 app.set('view engine', 'ejs')
@@ -77,6 +63,7 @@ app.use('/tienda/admin', misProductos.routes)
 app.use('/tienda/admin', editarProducto)
 app.use('/tienda',index)
 app.use(login)
+app.use(registro)
 app.use('/tienda',productos)
 app.use('/tienda',carrito.routes)
 
