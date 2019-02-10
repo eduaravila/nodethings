@@ -10,6 +10,7 @@
             <label for="cantidad-<%= productos[producto].qty %>">Cantidad <input type="number" name="cantidad-<%= productos[producto].qty %>" id="cantidad-<%= productos[producto].qty %>" value="<%=productos[producto].qty%>" min=0 class="lista-item--cantidad"></label>
             <form action="/tienda/carrito/eliminar" method="post">
                 <input type="text" hidden name="id" value="<%=productos[producto].id%>">
+                <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
                 <button class="lista-item--btn-eliminar" type="submit">Eliminar</button>
             </form>
         </li>
@@ -18,6 +19,7 @@
     <h3>Total <%=total%></h3>
     <form class="productos" method=POST action= '/tienda/realizarcompra'>
 <input type="submit" value="Comprar!" class="productos-item--btn-compra">
+<input type="hidden" name="_csrf" value="<%=csrfToken%>" />
     </form>
         <% } else {%>
             

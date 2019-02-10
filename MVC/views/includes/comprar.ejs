@@ -1,4 +1,5 @@
 <form action="/tienda/carrito" method="POST">
-    <input type="text" hidden name="id" id="id" value="<%=id%>">
-    <button type="submit" class="lista-item--btn-form">Comprar</button>
+	<input type="text" hidden name="id" id="id" value="<%=id%>" />
+	<input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+	<button type="submit" class="lista-item--btn-form">Comprar</button>
 </form>

@@ -12,7 +12,8 @@
 
             <form action="/tienda/admin/eliminar" method="post" class="lista-productos--form-eliminar">
                 <input type="text" name="id" hidden value="<%= productos[producto]._id %>">
-            <button type="submit" class="formulario-item--btn--eliminar">X</button>
+                <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+                            <button type="submit" class="formulario-item--btn--eliminar">X</button>
             </form>
             
         </div>

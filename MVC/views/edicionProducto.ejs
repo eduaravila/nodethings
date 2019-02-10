@@ -10,6 +10,7 @@
     <input type="number" min=0 name="cantidad" id="disponibles" placeholder="Disponibles" value="<%= cantidad%>" required class="formulario-item--input"> 
         <label for="imagen" class="formulario-label">Imagen</label>
     <input type="text" name="imagen" id="imagen" placeholder="link de la imagen de portada" value="<%= imagen%>"required class="formulario-item--input"> 
-<button type="submit" class="formulario-item--btn">Enviar</button>
+    <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+    <button type="submit" class="formulario-item--btn">Enviar</button>
     </form>
 </div>
