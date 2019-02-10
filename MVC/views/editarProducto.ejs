@@ -58,10 +58,10 @@
 		<input type="text" name="id" id="id" value="<%=id%>" hidden>
 		<input type="hidden" name="_csrf" value="<%=csrfToken%>" />
 		<% if(editar=="true"){%>
-			<input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+			
 			<button type="submit" class="formulario-item--btn">Actualizar</button>
 			<%}else{%>
-				<input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+				
 		<button type="submit" class="formulario-item--btn">Enviar</button>
 		<%}%>
 	</form>

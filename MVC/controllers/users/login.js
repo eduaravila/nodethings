@@ -5,7 +5,7 @@ const sesion_model = require('../../models/sesion')
 const mensaje_helper = require('../../helpers/mensajes')
 let error = new mensaje_helper()
 const getLogin = (req, res, next) => {
-	console.log(req.cookie.ingreso)
+	
 
 	if (req.ingreso) {
 		res.redirect('/tienda')
