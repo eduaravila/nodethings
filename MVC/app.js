@@ -39,10 +39,12 @@ app.use('/tienda/*',async (req,res,next) => {
 		let usuario = await jwt_helper.desifrarToken(token);
 		console.log('usuario',usuario);
 		let sesion = await sesion_model.findOne({usuario:usuario.user._id})
+		
 		console.log('sesion',sesion);
 		
 		if(sesion){
 			console.log(sesion);
+			req.sesion = sesion;
 			next();
 		}
 		else{

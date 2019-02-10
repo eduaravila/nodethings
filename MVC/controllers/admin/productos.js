@@ -1,5 +1,5 @@
 const producto = require('../../models/productos').productos
-
+const usuarios_model = require('../../models/usuarios').usuarios
 // const compras = require('./compras').compras
 const objectId = require('mongodb').ObjectID
 const getAgregarProducto = (req, res, next) => {
@@ -17,16 +17,16 @@ const getAgregarProducto = (req, res, next) => {
 	})
 }
 
-const postNuevoProducto = (req, res, next) => {
+const postNuevoProducto = async (req, res, next) => {
 	let { nombre, disponibles,descripcion, imagen, precio } = req.body
 	
-
-	new producto({ nombre, disponibles, imagen, precio,descripcion,autor:req.user._id}).save()
+	let user = await usuarios_model.findOne({ _id: req.sesion.usuario })
+	new producto({ nombre, disponibles, imagen, precio,descripcion,autor:user._id}).save()
 	.then(()=> console.log('Guardado con exito'))
 
 
 	// exports.productos=productos; // * volver a exportar el arreglo para ver los cambios al agregar un nuevo producto con el formualario
-	res.redirect('/')
+	res.redirect('/tienda')
 }
 const edicionProducto = async (req, res, next) => {
 	try{
@@ -50,7 +50,7 @@ const edicionProducto = async (req, res, next) => {
 			})
 
 	} else {
-		res.redirect('/')
+		res.redirect('/tienda')
 	}
 }
 catch(err){
@@ -61,9 +61,10 @@ catch(err){
 
 const postActualizarProducto = async (req, res, next) => {
 	try{
+		let user = await usuarios_model.findOne({ _id: req.sesion.usuario })
 	let { id, nombre, disponibles, imagen, precio,descripcion} = req.body
-			await producto.updateOne({_id:new objectId(id)},{nombre,disponibles,imagen,precio,descripcion,autor:req.user._id})			
-			res.redirect('/')
+			await producto.updateOne({_id:new objectId(id)},{nombre,disponibles,imagen,precio,descripcion,autor:user._id})			
+			res.redirect('/tienda')
 	}
 	catch(err){
 		console.log(err);		
