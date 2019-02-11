@@ -2,6 +2,7 @@ const real = require('../../helpers/string')
 const jwt_helper = require('../../helpers/jwt')
 const usuario_model = require('../../models/usuarios').usuarios
 const mensaje_helper = require('../../helpers/mensajes')
+const mail_helper = require('../../helpers/mailer')
 let error = new mensaje_helper()
 
 const postRegistro =async (req,res,next)=> {    
@@ -10,6 +11,7 @@ const postRegistro =async (req,res,next)=> {
         if(real.stringRealArreglo([correo,usuario,contraseña,contraseñaR])){    
             let nuevoUsuario= new usuario_model({correo,usuario,contraseña})
             await nuevoUsuario.save();
+            mail_helper.enviar_mail(correo);
             res.redirect('/')
         }
         else{

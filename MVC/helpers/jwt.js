@@ -14,6 +14,14 @@ class Token{
             return Promise.reject(err)
         }
     }
+    crearToken_password(){
+        try{
+        return Promise.resolve(jwt.sign(this.objeto,process.env.SECRETO,{expiresIn:'15m'})) // ?expira en 15 minutos para reiniciar los passwords 
+        }
+        catch(err){
+            return Promise.reject(err)
+        }
+    }
     static desifrarToken(token = this.token){
         console.log();
         
@@ -27,3 +35,11 @@ class Token{
 
 }
 module.exports = Token;
+new Token({nombre:"Eduardo"}).crearToken()
+.then(res=>{
+console.log();
+
+})
+.catch(err=>{console.log(err);
+});
+
