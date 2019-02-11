@@ -2,8 +2,12 @@
 <%- include('includes/nav.ejs') %>
 <div class="contenido">
     <h1 class="contenido-title">Catalogo de productos</h1>
+
+    <%if(error) {%>
+        <div class="card-mensaje card-mensaje--error"><%=error%></div>
+        <%}%>
     <div class="card">
-        <h3 class="card-title">Login</h3>
+        <h3 class="card-title">Registro</h3>
         <form action="/registro" method="post" class="form-login">
         <label for="correo">Correo <input type="text" name="correo" id="correo" required placeholder="Ingresa tu correo"></label>
         <label for="usuario">Usuario <input type="text" name="usuario" id="usuario" required placeholder="Ingresa tu usuario"></label>

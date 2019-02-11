@@ -9,6 +9,7 @@ const routes = express.Router()
 routes.get('/login',volver_index,login_controler.getLogin)
 routes.get('/',volver_index,login_controler.getLogin)
 routes.post('/login',login_controler.postLogin)
+routes.post('/logout',login_controler.postLogout)
 
 
 module.exports = routes;

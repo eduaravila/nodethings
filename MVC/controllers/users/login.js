@@ -24,6 +24,22 @@ const getLogin = (req, res, next) => {
 		})
 	}
 }
+const postLogout = async (req, res, next) => {
+	try{
+	let sesion = req.cookies.sesion;
+	let token = await jwt_helper.desifrarToken(sesion)
+		console.log('token',token);
+		await sesion_model.findOneAndDelete({usuario:token.user._id});
+		
+		res.redirect('/');
+	}
+	catch(err){
+		console.log(err);
+		
+		res.redirect('/');
+	}
+
+}
 
 const postLogin = async (req, res, next) => {
 	try {
@@ -54,7 +70,7 @@ const postLogin = async (req, res, next) => {
 			res.redirect('/login')
 		}
 	} catch (err) {
-		error.setMensaje('error', err)
+		error.setMensaje('error', 'Usuario incorrecto')
 		console.log('mmmm', err)
 		res.redirect('/')
 	}
@@ -62,5 +78,6 @@ const postLogin = async (req, res, next) => {
 
 module.exports = {
 	getLogin,
-	postLogin
+	postLogin,
+	postLogout
 }

@@ -1,6 +1,9 @@
 const real = require('../../helpers/string')
 const jwt_helper = require('../../helpers/jwt')
 const usuario_model = require('../../models/usuarios').usuarios
+const mensaje_helper = require('../../helpers/mensajes')
+let error = new mensaje_helper()
+
 const postRegistro =async (req,res,next)=> {    
     try{
     let {correo,usuario,contraseña,contraseñaR} = req.body;        
@@ -10,17 +13,24 @@ const postRegistro =async (req,res,next)=> {
             res.redirect('/')
         }
         else{
+            error.setMensaje('error', 'Entradas invalidas!')
             res.redirect('/registro')
         }
     }
     catch(err){
         console.log(err);
-        
-        res.redirect('404');
+        let mensaje = !!err.message && err.message + (!!err.errmsg && err.errmsg);
+        error.setMensaje('error', mensaje)
+        res.redirect('/registro');
     }
 }
 const getRegistro =(req,res,next)=> {     
-    res.render('registro',{bienvenida:"Registrarse a la mejor plataforma de compras",tituloPagina:"Registro",activeUrl:"/registro",path:'/registro'})    
+    let mensaje = null
+
+		if (error.existe('error')) {
+			mensaje = error.getMensaje('error')
+		}
+    res.render('registro',{bienvenida:"Registrarse a la mejor plataforma de compras",tituloPagina:"Registro",activeUrl:"/registro",path:'/registro',error: mensaje})    
 }
 
 

@@ -31,30 +31,35 @@ app.use(csrf({ cookie: true })) // ? el orden en donde se pone la libreia import
 
 app.use((req, res, next) => {
 	res.locals.csrfToken = req.csrfToken()
+	res.locals.login = false;
 	
 	next()
 })
-app.all('/tienda/*', async (req, res, next) => {
+
+app.all(/\/tienda|\/tienda\/\*/, async (req, res, next) => {
 	try {
 		let token = req.cookies.sesion
 		console.log(token)
-
+		
 		let usuario = await jwt_helper.desifrarToken(token)
 		console.log('usuario', usuario)
 		let sesion = await sesion_model.findOne({ usuario: usuario.user._id })
-
+		
 		console.log('sesion', sesion)
 
 		if (sesion) {
 			console.log(sesion)
 			req.sesion = sesion
+			res.locals.login = true;
 			next()
 		} else {
 			res.redirect('/login')
+			res.locals.login = false;
 		}
 	} catch (err) {
 		console.log(err)
 		res.redirect('/login')
+		res.locals.login = false;
 	}
 })
 

@@ -20,6 +20,18 @@ body{
     align-items: center;
     flex-direction: column;
 }
+.card-mensaje{
+    border: 1px solid #afffaf;
+    padding: .5rem;
+    background: #e5ffe5;
+    margin: .3rem;
+}
+.card-mensaje--error{
+    border: 1px solid #ff0047;
+    background: #ffe2e2;    
+    font-weight: bold;
+    color: red;
+}
 .producto-item--conjunto{
     margin-top:10px;
 }

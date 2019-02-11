@@ -15,16 +15,19 @@ const volver_index = async (req, res, next) => {
 		if (sesion) {
 			
             req.ingreso = true
-         
+		
+
 			
 		} else {
             req.ingreso = false
-         
+	
+
             
 		}
 	} catch (err) {
         req.ingreso = false
-        
+	  
+
     }
     next()
 }

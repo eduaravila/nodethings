@@ -12,7 +12,8 @@ const usuariosSchema = new mongoose.Schema({
 	},
 	correo: {
 		type: String,
-		required: true
+		required: true,
+		unique:true
 	},
 	contraseña: {
 		type: String,
@@ -131,7 +132,7 @@ usuariosSchema.pre('save', function(next) {
 })
 usuariosSchema.statics.comprobar = async function(usuario, pass) {
 	try {
-		let resultado = await this.findOne({ usuario: usuario })
+		let resultado = await this.findOne({$or:[{ usuario: usuario },{correo:usuario}]})
 		let comparacion = await bc.compare(pass, resultado.contraseña)
 		if (!!comparacion) {
 			return Promise.resolve(resultado)

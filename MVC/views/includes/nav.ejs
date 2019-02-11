@@ -10,8 +10,15 @@
             <li class="list-item"><a href="/tienda/pedidos" class="<%= path=='/pedidos' ? 'active' : ''%>">Mis pedidos</a></l>
         </ul>
         <ul class="list-login">
+            <%if(!login){%>
             <li class="list-item"><a href="/login" class="<%= path=='/login' ? 'active' : ''%>">Login</a></l>
             <li class="list-item"><a href="/registro" class="<%= path=='/registro' ? 'active' : ''%>">Registro</a></l>
+                <%}else{%>
+                    <form action="/logout" method="post">
+                        <input type="hidden" name="_csrf" value="<%=csrfToken%>" /> 
+                    <li class="list-item"><button href="/registro" type="submit" class="<%= path=='/registro' ? 'active' : ''%>">logout</button></l>
+                    </form>
+                    <%}%>
         </ul>
     </nav>
     </header>
