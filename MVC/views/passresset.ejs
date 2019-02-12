@@ -1,0 +1,17 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/nav.ejs') %>
+<div class="contenido">    
+    <%if(error) {%>
+        <div class="card-mensaje card-mensaje--error"><%=error%></div>
+        <%}%>
+    <div class="card">
+        <h3 class="card-title">Reniciar contraseña</h3>
+        <form action="/reset" method="post" class="form-login">
+        <label for="mail">mail <input type="text" name="mail" id="mail" required placeholder="Ingresa tu correo"></label>       
+        <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+                <input type="submit" value="Enviar codigo">
+    </form>
+    
+    <input type="hidden" name="_csrf" value="<%=csrfToken%>" />    </div>
+</div>
+<%- include('includes/end.ejs') %>

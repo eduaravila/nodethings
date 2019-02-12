@@ -21,6 +21,10 @@ const usuariosSchema = new mongoose.Schema({
 		trim: true,
 		minlength: 8
 	},
+	resetToken:{
+		type:String,
+		unique:true
+	},
 	carrito: {
 		items: {
 			type: [
@@ -130,6 +134,28 @@ usuariosSchema.pre('save', function(next) {
 		next()
 	}
 })
+
+usuariosSchema.statics.encriptar_password = async function(pass,mail) {
+	try{
+		bc.genSalt(10, async (err, salt) => {
+			bc.hash(pass, salt,async (err, hash) => {
+				if (err) {
+					console.log({
+						err,
+						mensaje: 'Error al encriptar la contraseña'
+					})
+				} else {
+					console.log(hash)
+					let nuevo = await this.findOneAndUpdate({correo:mail},{resetToken:'',contraseña:hash})
+					return Promise.resolve(nuevo)
+					}
+			})
+		})
+	}
+	catch(err){
+		return Promise.reject(err)
+	}
+}
 usuariosSchema.statics.comprobar = async function(usuario, pass) {
 	try {
 		let resultado = await this.findOne({$or:[{ usuario: usuario },{correo:usuario}]})

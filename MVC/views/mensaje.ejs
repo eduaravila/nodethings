@@ -1,0 +1,10 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/nav.ejs') %>
+<div class="contenido">
+    <h1 class="contenido-title"><%=mensaje%></h1>
+    <%if(error) {%>
+        <div class="card-mensaje card-mensaje--error"><%=error%></div>
+        <%}%>        
+    <input type="hidden" name="_csrf" value="<%=csrfToken%>" />    </div>
+</div>
+<%- include('includes/end.ejs') %>
