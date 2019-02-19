@@ -63,7 +63,7 @@ const postActualizarProducto = async (req, res, next) => {
 	try{
 		let user = await usuarios_model.findOne({ _id: req.sesion.usuario })
 	let { id, nombre, disponibles, imagen, precio,descripcion} = req.body
-			await producto.updateOne({_id:new objectId(id)},{nombre,disponibles,imagen,precio,descripcion,autor:user._id})			
+			await producto.updateOne({_id:new objectId(id),autor:req.sesion.usuario},{nombre,disponibles,imagen,precio,descripcion,autor:user._id})			
 			res.redirect('/tienda')
 	}
 	catch(err){
@@ -92,9 +92,11 @@ catch(err){
 }
 const postEliminarProducto = async(req, res, next) => {
 	let { id } = req.body
-	let resultado = await req.user.traducirCarro   
-	await req.user.eliminarProducto(id,resultado)
-	producto.deleteOne({_id:new objectId(id)}).then(()=> {
+	let user = await usuarios_model.findOne({_id:req.sesion.usuario});
+	let resultado = await user.traducirCarro   
+
+	await user.eliminarProducto(id,resultado)
+	producto.deleteOne({_id:new objectId(id),autor:req.sesion.usuario}).then(()=> {
 		console.log("Eliminado con exito");
 		res.redirect('/admin/productos')
 	})
@@ -103,8 +105,8 @@ const postEliminarProducto = async(req, res, next) => {
 const getMisProductos =async (req, res, next) => {
 	try{
 
-
-	let productos = await producto.find()
+		let usuario =  req.sesion.usuario
+	let productos = await producto.find({autor:usuario})
 	res.render('misProductos', {
 		productos,
 		tituloPagina: 'Mis productos',

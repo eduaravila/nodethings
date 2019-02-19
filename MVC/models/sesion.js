@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 const sesionSchema = new Schema({
     expires:{
         type:Date,
-        expires: '1d',
+        expires: '30d',
         default:new Date()
     },
     usuario:{

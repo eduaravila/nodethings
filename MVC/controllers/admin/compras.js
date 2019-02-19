@@ -29,8 +29,9 @@ const postEliminarProducto = async (req, res, next) => {
 	try {
 		let { id } = req.body
 		let user = await usuarios_model.findOne({ _id: req.sesion.usuario })
-		let resultado = user.traducirCarro
+		let resultado = await user.traducirCarro
 		await user.eliminarProducto(id, resultado)
+		res.redirect('/tienda/carrito');
 	} catch (err) {
 		console.log(err)
 	}
