@@ -20,11 +20,7 @@ const usuariosSchema = new mongoose.Schema({
 		required: true,
 		trim: true,
 		minlength: 8
-	},
-	resetToken:{
-		type:String,
-		unique:true
-	},
+	},	
 	carrito: {
 		items: {
 			type: [
@@ -44,7 +40,10 @@ const usuariosSchema = new mongoose.Schema({
 			required: true,
 			default: 0
 		}
-	}
+	},
+	resetToken:{
+		type:String,				
+	},
 })
 
 const buscarProducto = async (id) => {
@@ -123,7 +122,7 @@ usuariosSchema.pre('save', function(next) {
 					})
 				} else {
 					console.log(hash)
-
+					this.resetToken = this.usuario
 					this.contraseña = hash
 					next()
 				}

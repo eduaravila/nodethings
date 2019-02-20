@@ -43,14 +43,16 @@
     "express-flash": "0.0.2",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
+    "express-validator": "^5.3.1",
     "flash": "^1.1.0",
-    "handlebars": "^4.0.12",
+    "handlebars": "^4.1.0",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "mongodb": "^3.1.13",
     "mongoose": "^5.4.7",
     "pug": "^2.0.3",
-    "superagent": "^4.1.0"
+    "superagent": "^4.1.0",
+    "validator": "^10.11.0"
   }
 }

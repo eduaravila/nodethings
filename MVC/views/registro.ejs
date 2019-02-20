@@ -18,4 +18,37 @@
     </form>
     </div>
 </div>
+<script src="js/validator/validator.js"></script>
+<script>
+    let correo_i = document.querySelector('#correo')
+    let pass = document.querySelector('#contraseña')
+    let pass_r= document.querySelector('#contraseñaR')
+    
+    correo_i.addEventListener('change',(e)=> {
+        e.preventDefault()
+        if(validator.isEmail(e.target.value) && validator.isAlphanumeric(['ar', 'ar-AE', 'ar-BH', 'ar-DZ', 'ar-EG', 'ar-IQ', 'ar-JO', 'ar-KW', 'ar-LB', 'ar-LY', 'ar-MA', 'ar-QA', 'ar-QM', 'ar-SA', 'ar-SD', 'ar-SY', 'ar-TN', 'ar-YE', 'bg-BG', 'cs-CZ', 'da-DK', 'de-DE', 'el-GR', 'en-AU', 'en-GB', 'en-HK', 'en-IN', 'en-NZ', 'en-US', 'en-ZA', 'en-ZM', 'es-ES', 'fr-FR', 'hu-HU', 'it-IT', 'ku-IQ', 'nb-NO', 'nl-NL', 'nn-NO', 'pl-PL', 'pt-BR', 'pt-PT', 'ru-RU', 'sl-SI', 'sk-SK', 'sr-RS', 'sr-RS@latin', 'sv-SE', 'tr-TR', 'uk-UA'])){ 
+            console.log('email');                                               
+        }    
+        else 
+        { 
+            console.log('no email');            
+            e.target.value = ''                      
+            e.target.setAttribute('placeholder','Agrega un email correcto!')                    
+            correo_i.focus();
+        }
+    })
+    pass_r.addEventListener('change',(e)=>{
+        let valor = pass.value;
+        if(valor === e.target.value){ 
+            console.log('passwork igual');                                                         
+        }    
+        else 
+        {             
+            e.target.value = ''                      
+            e.target.setAttribute('placeholder','Las contraseñas son distintas!')                    
+            pass_r.focus()
+        }
+    })
+
+</script>
 <%- include('includes/end.ejs') %>

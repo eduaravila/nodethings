@@ -19,7 +19,7 @@ const getLogin = (req, res, next) => {
 			tituloPagina: 'Login',
 			activeUrl: '/login',
 			path: '/login',
-			error: mensaje
+			error: mensaje,			
 		})
 	}
 }
