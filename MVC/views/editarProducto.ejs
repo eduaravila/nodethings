@@ -1,5 +1,9 @@
 <%- include('includes/head.ejs') %> <%- include('includes/nav.ejs') %>
 <div class="contenedor-formulario">
+		<%if(error) {%>
+			<div class="card-mensaje card-mensaje--error"><%=error%></div>
+			<%}%>
+			
 	<h1>Agregar un nuevo producto</h1>
 	<form action="<%= editar =='true' ? '/tienda/admin/actualizar/' : '/tienda/admin/nuevoproducto' %>" method="post" class="formulario">
 		<label for="producto" class="formulario-label">Nombre</label>

@@ -67,7 +67,7 @@ const postLogin = async (req, res, next) => {
 			res.redirect('/login')
 		}
 	} catch (err) {
-		error.setMensaje('error', 'Usuario incorrecto')
+		error.setMensaje('error', err)
 		console.log('mmmm', err)
 		res.redirect('/')
 	}

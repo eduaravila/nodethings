@@ -17,5 +17,22 @@
     <input type="hidden" name="_csrf" value="<%=csrfToken%>" />    </div>
     
 </div>
+<script src="js/validator/validator.js"></script>
+<script>    
+    let pass = document.querySelector('#contraseña')
+    
+    pass.addEventListener('change',(e)=>{
+        let valor = e.target.value;
+        if(validator.isAlphanumeric(valor)&& validator.isLength(valor,{min:8})){ 
+            console.log('passwork valido');                                                         
+        }    
+        else 
+        {             
+            e.target.value = ''                      
+            e.target.setAttribute('placeholder','Las contraseñas invalida!')                    
+            pass.focus()
+        }
+    })
 
+</script>
 <%- include('includes/end.ejs') %>

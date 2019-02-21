@@ -20,6 +20,9 @@ body{
     align-items: center;
     flex-direction: column;
 }
+.card-item--error{
+    border:2px solid red;
+}
 .card-mensaje{
     border: 1px solid #afffaf;
     padding: .5rem;

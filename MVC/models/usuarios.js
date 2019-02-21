@@ -158,16 +158,22 @@ usuariosSchema.statics.encriptar_password = async function(pass,mail) {
 usuariosSchema.statics.comprobar = async function(usuario, pass) {
 	try {
 		let resultado = await this.findOne({$or:[{ usuario: usuario },{correo:usuario}]})
-		let comparacion = await bc.compare(pass, resultado.contraseña)
-		if (!!comparacion) {
-			return Promise.resolve(resultado)
-		} else {
-			return Promise.reject(new Error('Las contraseñas no coinciden'))
+		if(!!resultado){
+			let comparacion = await bc.compare(pass, resultado.contraseña)
+	
+			if (!!comparacion&& !!resultado) {
+				return Promise.resolve(resultado)
+			} else {
+				return Promise.reject(new Error('Las contraseñas no coinciden'))
+			}
+		}
+		else {
+			return Promise.reject(new Error('Usuario invalido'))
 		}
 	} catch (err) {
 		return Promise.reject({
 			err,
-			mensaje: 'No se puedieron comparar las contraseñas'
+			mensaje: 'Contraseña invalida'
 		})
 	}
 }

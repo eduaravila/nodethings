@@ -1,76 +1,53 @@
-const { check } = require('express-validator/check')
+const { body } = require('express-validator/check')
+const usuarios_model = require('../models/usuarios')
 
-const validar_registro = (req, res, next) => {
-	console.log('validar')
-	check(
+const validar_registro = [
+	body(
 		'contraseña',
 		'Password invalido agrega por los menos 8 caracteres, ademas de ser alfanumerico'
 	)
 		.isLength({ min: 8 })
-		.exists()
-		.custom((v) => {
-			if (v !== req.body.contraseñaR) {
-				throw new Error('Las contraseñas no coinciden')
-			}
-		})
-		.isAlphanumeric([
-			'ar',
-			'ar-AE',
-			'ar-BH',
-			'ar-DZ',
-			'ar-EG',
-			'ar-IQ',
-			'ar-JO',
-			'ar-KW',
-			'ar-LB',
-			'ar-LY',
-			'ar-MA',
-			'ar-QA',
-			'ar-QM',
-			'ar-SA',
-			'ar-SD',
-			'ar-SY',
-			'ar-TN',
-			'ar-YE',
-			'bg-BG',
-			'cs-CZ',
-			'da-DK',
-			'de-DE',
-			'el-GR',
-			'en-AU',
-			'en-GB',
-			'en-HK',
-			'en-IN',
-			'en-NZ',
-			'en-US',
-			'en-ZA',
-			'en-ZM',
-			'es-ES',
-			'fr-FR',
-			'hu-HU',
-			'it-IT',
-			'ku-IQ',
-			'nb-NO',
-			'nl-NL',
-			'nn-NO',
-			'pl-PL',
-			'pt-BR',
-			'pt-PT',
-			'ru-RU',
-			'sl-SI',
-			'sk-SK',
-			'sr-RS',
-			'sr-RS@latin',
-			'sv-SE',
-			'tr-TR',
-			'uk-UA'
-		])
-
-	check('correo')
+		.exists(),
+	body('correo','Correo invalido!')
 		.isEmail()
-		.exists()
-	next()
-}
+		.custom((value,{req}) =>{
+			console.log('correo',value);
+			
+			return usuarios_model.usuarios
+				.findOne({ correo: value+'' })
+				.then((res) => res ? Promise.reject('correo ya registrado'):true)
+			}
+		),
+	body('contraseñaR', 'contraseñas distintas!').custom((v, { req }) => {
+		console.log(req.body, v !== req.body.contraseñaR)
+		if (v+"" !== req.body['contraseña']+"") {
+			console.log('distintas')
+
+			return Promise.reject()
+		}else{
+		return true
+		}
+	})
+]
+const validar_producto = [
+	body('nombre','Nombre no valido!')
+	.exists()
+	.trim(),
+	body('disponibles','El minimo debe der 1')
+	.exists()
+	.isInt()
+	.isLength({min:1}),
+	body('descripcion')
+	.exists()
+	,
+	body('precio','Precio solo con numeros').isFloat()
+	.exists()
+	.custom(v => +v >0 ? true: Promise.reject('Precio invalido!',v)),
+	body('imagen','Agrega una imagen desde una URL valida')
+	.isURL()
+	
+]
 module.exports = {
-	validar_registro
+	validar_registro,
+	validar_producto
 }
