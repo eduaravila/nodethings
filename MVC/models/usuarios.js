@@ -13,14 +13,14 @@ const usuariosSchema = new mongoose.Schema({
 	correo: {
 		type: String,
 		required: true,
-		unique:true
+		unique: true
 	},
 	contraseña: {
 		type: String,
 		required: true,
 		trim: true,
 		minlength: 8
-	},	
+	},
 	carrito: {
 		items: {
 			type: [
@@ -41,9 +41,9 @@ const usuariosSchema = new mongoose.Schema({
 			default: 0
 		}
 	},
-	resetToken:{
-		type:String,				
-	},
+	resetToken: {
+		type: String
+	}
 })
 
 const buscarProducto = async (id) => {
@@ -52,6 +52,12 @@ const buscarProducto = async (id) => {
 usuariosSchema.virtual('traducirCarro').get(async function() {
 	let res = await productos.find()
 	console.log(res, this.carrito)
+	this.carrito.items = [
+		...this.carrito.items.filter(
+			(item) =>
+				!!res.find((i_find) => i_find._id.toString() == item.id.toString())
+		)
+	]
 
 	if (res.length > 0 && this.carrito.items.length > 0) {
 		return [
@@ -88,6 +94,43 @@ usuariosSchema.methods.eliminarProducto = function(id, resultado) {
 
 	return this.save()
 }
+usuariosSchema.virtual('obtenerTotal').get(async function() {
+	try {
+		let res = await productos.find()
+
+		this.carrito.items = [
+			...this.carrito.items.filter(
+				(item) =>
+					!!res.find((i_find) => i_find._id.toString() == item.id.toString())
+			)
+		]
+
+		if (res.length > 0 && this.carrito.items.length > 0) {
+			let productos = [
+				...this.carrito.items.map((i) => {
+					let { nombre, precio } = res.find(
+						(e) => e._id.toString() == i.id.toString()
+					)
+					return { nombre, precio, qty: i.qty, id: i.id }
+				})
+			]
+			this.carrito.total = productos
+				.map(i => i.precio)
+				.reduce((sum, b) => sum + +b)
+				console.log('Totales',this.carrito.total,productos);							
+		}
+		else{
+			this.carrito.total = 0
+		}
+
+		console.log('total',this.carrito.total);
+		
+		this.save()
+		return Promise.resolve(this.carrito.total)
+	} catch (err) {
+		return Promise.reject(err)
+	}
+})
 usuariosSchema.methods.agregarCarro = async function(id) {
 	let producto = await buscarProducto(id)
 	console.log(producto)
@@ -134,10 +177,10 @@ usuariosSchema.pre('save', function(next) {
 	}
 })
 
-usuariosSchema.statics.encriptar_password = async function(pass,mail) {
-	try{
+usuariosSchema.statics.encriptar_password = async function(pass, mail) {
+	try {
 		bc.genSalt(10, async (err, salt) => {
-			bc.hash(pass, salt,async (err, hash) => {
+			bc.hash(pass, salt, async (err, hash) => {
 				if (err) {
 					console.log({
 						err,
@@ -145,29 +188,32 @@ usuariosSchema.statics.encriptar_password = async function(pass,mail) {
 					})
 				} else {
 					console.log(hash)
-					let nuevo = await this.findOneAndUpdate({correo:mail},{resetToken:'',contraseña:hash})
+					let nuevo = await this.findOneAndUpdate(
+						{ correo: mail },
+						{ resetToken: '', contraseña: hash }
+					)
 					return Promise.resolve(nuevo)
-					}
+				}
 			})
 		})
-	}
-	catch(err){
+	} catch (err) {
 		return Promise.reject(err)
 	}
 }
 usuariosSchema.statics.comprobar = async function(usuario, pass) {
 	try {
-		let resultado = await this.findOne({$or:[{ usuario: usuario },{correo:usuario}]})
-		if(!!resultado){
+		let resultado = await this.findOne({
+			$or: [{ usuario: usuario }, { correo: usuario }]
+		})
+		if (!!resultado) {
 			let comparacion = await bc.compare(pass, resultado.contraseña)
-	
-			if (!!comparacion&& !!resultado) {
+
+			if (!!comparacion && !!resultado) {
 				return Promise.resolve(resultado)
 			} else {
 				return Promise.reject(new Error('Las contraseñas no coinciden'))
 			}
-		}
-		else {
+		} else {
 			return Promise.reject(new Error('Usuario invalido'))
 		}
 	} catch (err) {

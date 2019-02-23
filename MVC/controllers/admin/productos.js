@@ -137,7 +137,7 @@ const postEliminarProducto = async (req, res, next) => {
 			_id: new objectId(id),
 			autor: req.sesion.usuario
 		})
-		res.redirect('/admin/productos')
+		res.redirect('/tienda/admin/productos')
 	} catch (err) {
 		let error = new Error(err)
 		next(error)

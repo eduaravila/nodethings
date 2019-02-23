@@ -6,7 +6,7 @@ const moment = require('moment')
 const getCarrito = async (req, res, next) => {
 	try{
 	let user = await usuarios_model.findOne({ _id: req.sesion.usuario })
-	let total = user.carrito.total
+	let total = await user.obtenerTotal
 
 	let resultado = await user.traducirCarro
 
