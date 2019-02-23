@@ -69,15 +69,13 @@ const edicionProducto = async (req, res, next) => {
 
 const postActualizarProducto = async (req, res, next) => {
 	try {
-		let { nombre, precio, disponibles, imagen, descripcion, _id } = req.body 
-		
+		let { nombre, precio, disponibles, imagen, descripcion, _id } = req.body
 
 		const errors = validationResult(req)
 		if (!errors.isEmpty()) {
 			let mensaje = null
 			error.setMensaje('error', [...errors.array().map((i) => i.msg + '||||')])
-			
-			
+
 			if (error.existe('error')) {
 				mensaje = error.getMensaje('error')
 			}
@@ -105,6 +103,8 @@ const postActualizarProducto = async (req, res, next) => {
 			res.redirect('/tienda')
 		}
 	} catch (err) {
+		let error = new Error(err)
+		next(error)
 		console.log(err)
 	}
 }
@@ -121,21 +121,27 @@ const detallesProducto = async (req, res, next) => {
 			path: '/productos'
 		})
 	} catch (err) {
+		let error = new Error(err)
+		next(error)
 		console.log(err)
 	}
 }
 const postEliminarProducto = async (req, res, next) => {
-	let { id } = req.body
-	let user = await usuarios_model.findOne({ _id: req.sesion.usuario })
-	let resultado = await user.traducirCarro
+	try {
+		let { id } = req.body
+		let user = await usuarios_model.findOne({ _id: req.sesion.usuario })
+		let resultado = await user.traducirCarro
 
-	await user.eliminarProducto(id, resultado)
-	producto
-		.deleteOne({ _id: new objectId(id), autor: req.sesion.usuario })
-		.then(() => {
-			console.log('Eliminado con exito')
-			res.redirect('/admin/productos')
+		await user.eliminarProducto(id, resultado)
+		await producto.deleteOne({
+			_id: new objectId(id),
+			autor: req.sesion.usuario
 		})
+		res.redirect('/admin/productos')
+	} catch (err) {
+		let error = new Error(err)
+		next(error)
+	}
 }
 
 const getMisProductos = async (req, res, next) => {
@@ -149,6 +155,8 @@ const getMisProductos = async (req, res, next) => {
 			path: '/admin/misproductos'
 		})
 	} catch (err) {
+		let error = new Error(err)
+		next(error)
 		console.log(err)
 	}
 }

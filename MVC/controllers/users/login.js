@@ -68,7 +68,7 @@ const postLogin = async (req, res, next) => {
 		}
 	} catch (err) {
 		error.setMensaje('error', err)
-		console.log('mmmm', err)
+		
 		res.redirect('/')
 	}
 }

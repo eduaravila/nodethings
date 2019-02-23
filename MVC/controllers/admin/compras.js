@@ -4,6 +4,7 @@ const usuarios_model = require('../../models/usuarios').usuarios
 const moment = require('moment')
 
 const getCarrito = async (req, res, next) => {
+	try{
 	let user = await usuarios_model.findOne({ _id: req.sesion.usuario })
 	let total = user.carrito.total
 
@@ -23,7 +24,13 @@ const getCarrito = async (req, res, next) => {
 			productos: resultado,
 			total
 		})
+		}
 	}
+	catch(err){
+		let error = new Error(err)
+		next(error)
+	}
+
 }
 const postEliminarProducto = async (req, res, next) => {
 	try {
@@ -33,6 +40,8 @@ const postEliminarProducto = async (req, res, next) => {
 		await user.eliminarProducto(id, resultado)
 		res.redirect('/tienda/carrito');
 	} catch (err) {
+		let error = new Error(err)
+		next(error)
 		console.log(err)
 	}
 }
@@ -51,6 +60,8 @@ const postRealizarCompra = async (req, res, next) => {
 		await user.limpiarCarrito()
 		res.redirect('/tienda/carrito')
 	} catch (err) {
+		let error = new Error(err)
+		next(error)
 		console.log(err)
 	}
 }
@@ -62,6 +73,8 @@ const postCarrito = async (req, res, next) => {
 		await user.agregarCarro(id)
 		res.redirect('/tienda')
 	} catch (err) {
+		let error = new Error(err)
+		next(error)
 		console.log(err)
 	}
 }
@@ -77,6 +90,8 @@ const getPedidos = async (req, res, next) => {
 			moment
 		})
 	} catch (err) {
+		let error = new Error(err)
+		next(error)
 		console.log(err)
 	}
 }

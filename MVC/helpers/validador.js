@@ -32,13 +32,14 @@ const validar_registro = [
 const validar_producto = [
 	body('nombre','Nombre no valido!')
 	.exists()
-	.trim(),
+	.isString()	,
 	body('disponibles','El minimo debe der 1')
 	.exists()
 	.isInt()
 	.isLength({min:1}),
 	body('descripcion')
 	.exists()
+	.isString()
 	,
 	body('precio','Precio solo con numeros').isFloat()
 	.exists()

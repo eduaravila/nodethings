@@ -35,7 +35,9 @@ app.use((req, res, next) => {
 	
 	next()
 })
-
+app.use((error,req,res,next)=>{
+	res.status(500).render('500')
+})
 app.all(/\/tienda|\/tienda\/\*/, async (req, res, next) => {
 	try {
 		let token = req.cookies.sesion
