@@ -1,17 +1,20 @@
-body{
-    padding:0;
-    margin:0;
+body {
+    padding: 0;
+    margin: 0;
 }
-.main-header-item--nav{
-    display: flex;    
+
+.main-header-item--nav {
+    display: flex;
 }
-.list-login{
+
+.list-login {
     list-style: none;
-    padding:0;
-    margin:0;
-    display:flex;
+    padding: 0;
+    margin: 0;
+    display: flex;
 }
-.producto{
+
+.producto {
     text-align: center;
     width: 100%;
     display: flex;
@@ -20,75 +23,113 @@ body{
     align-items: center;
     flex-direction: column;
 }
-.card-item--error{
-    border:2px solid red;
+
+.card-item--error {
+    border: 2px solid red;
 }
-.card-mensaje{
+
+
+.paginacion-item {
+    border: 1px solid blue;
+    border-radius: .3rem;
+    padding: .5rem;
+    text-decoration: none;
+    color: blue;
+    margin: .3rem;
+}
+.paginacion-item:hover,
+.paginacion-item:active,
+.paginacion-item.activo{
+    color:white;
+    background: blue;
+}
+
+.paginacion {
+    display: flex;
+    justify-content: center;
+}
+
+.card-mensaje {
     border: 1px solid #afffaf;
     padding: .5rem;
     background: #e5ffe5;
     margin: .3rem;
 }
-.card-mensaje--error{
+
+.card-mensaje--error {
     border: 1px solid #ff0047;
-    background: #ffe2e2;    
+    background: #ffe2e2;
     font-weight: bold;
     color: red;
 }
-.producto-item--conjunto{
-    margin-top:10px;
+
+.producto-item--conjunto {
+    margin-top: 10px;
 }
-.producto-item--img{
-        max-width: 100%;
-        max-height: 80%;
+
+.producto-item--img {
+    max-width: 100%;
+    max-height: 80%;
 }
-.producto-item--btn{
-    color:#3737b7;
+
+.producto-item--btn {
+    color: #3737b7;
     background: white;
-    border:1px solid #3737b7;
+    border: 1px solid #3737b7;
     border-radius: 5px;
-    padding:.5rem;
-    margin:.5rem auto;
-    width:30%;
+    padding: .5rem;
+    margin: .5rem auto;
+    width: 30%;
     text-decoration: none;
 }
-.main-header{
+
+.main-header {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e7ea3a+13,3737b7+87 */
-background: #e7ea3a; /* Old browsers */
-background: -moz-linear-gradient(45deg, #e7ea3a 13%, #3737b7 87%); /* FF3.6-15 */
-background: -webkit-linear-gradient(45deg, #e7ea3a 13%,#3737b7 87%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(45deg, #e7ea3a 13%,#3737b7 87%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7ea3a', endColorstr='#3737b7',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    background: #e7ea3a;
+    /* Old browsers */
+    background: -moz-linear-gradient(45deg, #e7ea3a 13%, #3737b7 87%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(45deg, #e7ea3a 13%, #3737b7 87%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(45deg, #e7ea3a 13%, #3737b7 87%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7ea3a', endColorstr='#3737b7', GradientType=1);
+    /* IE6-9 fallback on horizontal gradient */
 }
-.nav-item--list{
-    margin:0;
+
+.nav-item--list {
+    margin: 0;
     list-style: none;
-    padding:0;
-    flex:1;
-    display:flex;
+    padding: 0;
+    flex: 1;
+    display: flex;
 }
-.list-item{
+
+.list-item {
     padding: 1 1.5rem;
-    margin:1rem;
-    color:#3737b7;
+    margin: 1rem;
+    color: #3737b7;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.list-item a{
-    
+
+.list-item a {
     outline: none;
     text-decoration: none;
 }
+
 .list-item a:hover,
 .list-item a:active,
-.list-item a.active{
-    color:red;
+.list-item a.active {
+    color: red;
 }
-.contenido{
+
+.contenido {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
 .card {
     width: 15%;
     padding: 5px;
@@ -100,16 +141,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7ea3a', end
     border-radius: 1rem;
     border: 1px solid black;
 }
-.card-title{
+
+.card-title {
     grid-column-start: centro;
     grid-column-end: derecha;
 }
-.form-login{
+
+.form-login {
     grid-row-start: 3;
     grid-column-start: centro;
     grid-column-end: derecha;
     display: flex;
     flex-direction: column;
 }
-
-

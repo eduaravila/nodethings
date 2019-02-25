@@ -1,29 +1,36 @@
-<%- include('includes/head.ejs') %>
-<%- include('includes/nav.ejs') %>
+<%- include('includes/head.ejs') %> <%- include('includes/nav.ejs') %>
 <div class="productos">
-    <% if(productos.length>0) { %>
-    <ul class="lista-productos">        
-        <% for(let producto = 0; producto < productos.length; producto++){ %> 
-        <li class="lista-productos--item">
-            <h3 class="lista-item--title"> <%= productos[producto].nombre %> </h3>
-            <img src="/<%= productos[producto].imagen %>"
-                alt="<%= productos[producto].nombre%>" class="list-item--img">
-                <span class="lista-item--conjunto"> 
-                <small>Disponibles <%= productos[producto].cantidad %> </small>
-                <b> Precio <%= productos[producto].precio %></b>
-            </span>
-                <span class="lista-item--conjunto">
-        <%- include('includes/comprar.ejs',{id:productos[producto]._id})%>
-            <a href="/tienda/producto/<%= productos[producto].id%>" class="lista-item--btn">Descripcion</a>
-        </span> 
-        </li>
-        <% }  %>
-    </ul>
-        <% } else {%>
-            
-        <h1>No hay productos en el catalogo</h1>
-        
-        <% }  %>
-    
+	<% if(productos.length>0) { %>
+	<ul class="lista-productos">
+		<% for(let producto = 0; producto < productos.length; producto++){ %>
+		<li class="lista-productos--item">
+			<h3 class="lista-item--title"><%= productos[producto].nombre %></h3>
+			<img
+				src="/<%= productos[producto].imagen %>"
+				alt="<%= productos[producto].nombre%>"
+				class="list-item--img"
+			/>
+			<span class="lista-item--conjunto">
+				<small>Disponibles <%= productos[producto].cantidad %> </small>
+				<b> Precio <%= productos[producto].precio %></b>
+			</span>
+			<span class="lista-item--conjunto">
+				<%- include('includes/comprar.ejs',{id:productos[producto]._id})%>
+				<a
+					href="/tienda/producto/<%= productos[producto].id%>"
+					class="lista-item--btn"
+					>Descripcion</a
+				>
+			</span>
+		</li>
+		<% } %>
+	</ul>
+	<%-
+	include('includes/paginacion.ejs',{primer_elemento:primer_elemento,actual_elemento:actual_elemento,existe_anterior:existe_anterior,anterior_elemento:anterior_elemento,actual_elemento:actual_elemento,siguiente_elemento:siguiente_elemento,ultimo_elemento:ultimo_elemento})%>
+	<% } else {%>
+
+	<h1>No hay productos en el catalogo</h1>
+
+	<% } %>
 </div>
 <%- include('includes/end.ejs') %>

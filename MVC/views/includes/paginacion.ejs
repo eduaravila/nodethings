@@ -1,0 +1,21 @@
+<div class="paginacion">
+	<%if(primer_elemento!=actual_elemento){%>
+	<a href="?p=1" class="paginacion-item">1</a>
+	<%}%> <%if(existe_anterior && anterior_elemento != primer_elemento){%>
+	<a href="?p=<%=anterior_elemento%>" class="paginacion-item"
+		><%=anterior_elemento%></a
+	>
+	<%}%>
+	<a href="?p=<%=actual_elemento%>" class="activo paginacion-item"
+		><%=actual_elemento%></a
+	>
+	<%if(existe_siguiente && siguiente_elemento != ultimo_elemento){%>
+	<a href="?p=<%=siguiente_elemento%>" class="paginacion-item"
+		><%=siguiente_elemento%></a
+	>
+	<%}%> <%if(ultimo_elemento!=actual_elemento){%>
+	<a href="?p=<%=ultimo_elemento%>" class="paginacion-item"
+		><%= ultimo_elemento%></a
+	>
+	<%}%>
+</div>
