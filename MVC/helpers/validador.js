@@ -43,10 +43,7 @@ const validar_producto = [
 	,
 	body('precio','Precio solo con numeros').isFloat()
 	.exists()
-	.custom(v => +v >0 ? true: Promise.reject('Precio invalido!',v)),
-	body('imagen','Agrega una imagen desde una URL valida')
-	.isURL()
-	
+	.custom(v => +v >0 ? true: Promise.reject('Precio invalido!',v))
 ]
 module.exports = {
 	validar_registro,

@@ -6,7 +6,7 @@
         <% for(let producto = 0; producto < productos.length; producto++){ %> 
         <li class="lista-productos--item">
             <h3 class="lista-item--title"> <%= productos[producto].nombre %> </h3>
-            <img src="<%= productos[producto].imagen %>"
+            <img src="/<%= productos[producto].imagen %>"
                 alt="<%= productos[producto].nombre%>" class="list-item--img">
                 <span class="lista-item--conjunto"> 
                 <small>Disponibles <%= productos[producto].cantidad %> </small>

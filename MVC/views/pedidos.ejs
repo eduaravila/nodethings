@@ -4,7 +4,8 @@
         <% if(pedidos.length >0){%>
             <%for(let pedido = 0; pedido < pedidos.length;pedido++){%>
                 <% if(pedidos[pedido].productos.length>0) { %>
-                    <ul class="lista-carrito">        
+                    <ul class="lista-carrito">
+                        <li><h1>#<%= pedido %>- <%=pedidos[pedido]._id%> -- <a href="/tienda/pedidos/detalles/<%=pedidos[pedido]._id%>">factura</a></h1></li>                         
                         <% for(let producto = 0; producto < pedidos[pedido].productos.length; producto++){ %> 
                         <li class="lista-carrito--item">
                             <h3 class="lista-item--title" name="<%= pedidos[pedido].productos[producto].nombre %>" </h3> <%= pedidos[pedido].productos[producto].nombre %> </h3>

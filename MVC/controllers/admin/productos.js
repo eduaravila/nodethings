@@ -3,6 +3,8 @@ const usuarios_model = require('../../models/usuarios').usuarios
 // const compras = require('./compras').compras
 const { validationResult } = require('express-validator/check')
 const mensaje_helper = require('../../helpers/mensajes')
+const file_helper = require('../../helpers/file')
+
 let error = new mensaje_helper()
 const objectId = require('mongodb').ObjectID
 const getAgregarProducto = (req, res, next) => {
@@ -22,22 +24,49 @@ const getAgregarProducto = (req, res, next) => {
 }
 
 const postNuevoProducto = async (req, res, next) => {
-	let { nombre, disponibles, descripcion, imagen, precio } = req.body
+	console.log('nuevo pro')
 
-	let user = await usuarios_model.findOne({ _id: req.sesion.usuario })
-	new producto({
-		nombre,
-		disponibles,
-		imagen,
-		precio,
-		descripcion,
-		autor: user._id
-	})
-		.save()
-		.then(() => console.log('Guardado con exito'))
+	try {
+		let { nombre, disponibles, descripcion, precio } = req.body
 
-	// exports.productos=productos; // * volver a exportar el arreglo para ver los cambios al agregar un nuevo producto con el formualario
-	res.redirect('/tienda')
+		if (req.file) {
+			let user = await usuarios_model.findOne({ _id: req.sesion.usuario })
+			await new producto({
+				nombre,
+				disponibles,
+				imagen: req.file.path,
+				precio,
+				descripcion,
+				autor: user._id
+			}).save()
+
+			// exports.productos=productos; // * volver a exportar el arreglo para ver los cambios al agregar un nuevo producto con el formualario
+			res.redirect('/tienda')
+		} else {
+			error.setMensaje('error', 'Imagen invalida!')
+
+			if (error.existe('error')) {
+				mensaje = error.getMensaje('error')
+			}
+
+			res.status(422).render('editarProducto', {
+				tituloPagina: 'Editar Producto',
+				activeUrl: '/admin/misproductos',
+				path: '/admin/agregar',
+				editar: true,
+				nombre: nombre,
+				precio: precio,
+				disponibles: disponibles,
+				imagen: '',
+				descripcion: descripcion,
+				id: '',
+				error: mensaje
+			})
+		}
+	} catch (err) {
+		console.log(err)
+		next(err)
+	}
 }
 const edicionProducto = async (req, res, next) => {
 	try {
@@ -54,7 +83,7 @@ const edicionProducto = async (req, res, next) => {
 				nombre: resultado.nombre,
 				precio: resultado.precio,
 				disponibles: resultado.disponibles,
-				imagen: resultado.imagen,
+				imagen: '',
 				descripcion: resultado.descripcion,
 				id: resultado._id,
 				error: ''
@@ -88,18 +117,37 @@ const postActualizarProducto = async (req, res, next) => {
 				nombre: nombre,
 				precio: precio,
 				disponibles: disponibles,
-				imagen: imagen,
+				imagen: '',
 				descripcion: descripcion,
 				id: _id,
 				error: mensaje
 			})
 		} else {
 			let user = await usuarios_model.findOne({ _id: req.sesion.usuario })
-			let { id, nombre, disponibles, imagen, precio, descripcion } = req.body
-			await producto.updateOne(
-				{ _id: new objectId(id), autor: req.sesion.usuario },
-				{ nombre, disponibles, imagen, precio, descripcion, autor: user._id }
-			)
+			let { id, nombre, disponibles, precio, descripcion } = req.body
+			if (!req.file) {
+				await producto.updateOne(
+					{ _id: new objectId(id), autor: req.sesion.usuario },
+					{ nombre, disponibles, precio, descripcion, autor: user._id }
+				)
+			} else {
+				let { imagen } = await producto.findOne({
+					_id: new objectId(id),
+					autor: req.sesion.usuario
+				})
+				await file_helper.eliminar_archivo(imagen)
+				await producto.updateOne(
+					{ _id: new objectId(id), autor: req.sesion.usuario },
+					{
+						nombre,
+						disponibles,
+						imagen: req.file.path,
+						precio,
+						descripcion,
+						autor: user._id
+					}
+				)
+			}
 			res.redirect('/tienda')
 		}
 	} catch (err) {
@@ -132,6 +180,12 @@ const postEliminarProducto = async (req, res, next) => {
 		let user = await usuarios_model.findOne({ _id: req.sesion.usuario })
 		let resultado = await user.traducirCarro
 
+		let { imagen } = await producto.findOne({
+			_id: new objectId(id),
+			autor: req.sesion.usuario
+		})
+		await file_helper.eliminar_archivo(imagen)
+		
 		await user.eliminarProducto(id, resultado)
 		await producto.deleteOne({
 			_id: new objectId(id),

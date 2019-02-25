@@ -5,7 +5,7 @@
 			<%}%>
 			
 	<h1>Agregar un nuevo producto</h1>
-	<form action="<%= editar =='true' ? '/tienda/admin/actualizar/' : '/tienda/admin/nuevoproducto' %>" method="post" class="formulario">
+	<form action="<%= editar =='true' ? '/tienda/admin/actualizar/' : '/tienda/admin/nuevoproducto' %>" method="post" class="formulario" enctype="multipart/form-data">
 		<label for="producto" class="formulario-label">Nombre</label>
 		<input
 			type="text"
@@ -52,11 +52,10 @@
 		/>
 		<label for="imagen" class="formulario-label">Imagen</label>
 		<input
-			type="text"
+			type="file"
 			name="imagen"
 			id="imagen"
-			placeholder="link de la imagen de portada"
-			value="<%= imagen%>"
+			placeholder="link de la imagen de portada"			
 			class="formulario-item--input"
 		/>
 		<input type="text" name="id" id="id" value="<%=id%>" hidden>
