@@ -176,7 +176,9 @@ const detallesProducto = async (req, res, next) => {
 }
 const postEliminarProducto = async (req, res, next) => {
 	try {
-		let { id } = req.body
+		console.log('eliminar');
+		
+		let  {id} = req.params
 		let user = await usuarios_model.findOne({ _id: req.sesion.usuario })
 		let resultado = await user.traducirCarro
 
@@ -191,7 +193,7 @@ const postEliminarProducto = async (req, res, next) => {
 			_id: new objectId(id),
 			autor: req.sesion.usuario
 		})
-		res.redirect('/tienda/admin/productos')
+		res.status(200).send({msg:"eliminado con exito",prod_id:id})
 	} catch (err) {
 		let error = new Error(err)
 		next(error)

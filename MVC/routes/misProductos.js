@@ -8,7 +8,7 @@ const controller_productos = require('../controllers/admin/productos')
 const routes = express.Router()
 
 routes.get('/productos',controller_productos.getMisProductos)
-routes.post('/eliminar',controller_productos.postEliminarProducto)
+routes.delete('/eliminar/:id',controller_productos.postEliminarProducto)
 
 
 exports.routes=routes;

@@ -10,11 +10,11 @@
         <div class="lista-productos--header">
             <input readonly value="<%= productos[producto].nombre %>" name="nombre" class='lista-item--titulo'>
 
-            <form action="/tienda/admin/eliminar" method="post" class="lista-productos--form-eliminar">
+            <div class="lista-productos--form-eliminar">
                 <input type="text" name="id" hidden value="<%= productos[producto]._id %>">
                 <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
-                            <button type="submit" class="formulario-item--btn--eliminar">X</button>
-            </form>
+                <button type="button" class="formulario-item--btn--eliminar">X</button>
+            </div>
             
         </div>
             <img src="/<%= productos[producto].imagen%>"
@@ -37,4 +37,5 @@
         <% }  %>
     
 </div>
+<script src="/js/productos.js"></script>
 <%- include('includes/end.ejs') %>
