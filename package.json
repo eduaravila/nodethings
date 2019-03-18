@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "start_node_basis": "node node_basic/app.js",
-    "auto_restart": "nodemon node_basic/app.js"
+    "auto_restart": "nodemon node_basic/app.js",
+    "start-native-app-dev": "webpack-dev-server --watch-poll",
+    "native_app_build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -30,12 +32,28 @@
   },
   "homepage": "https://github.com/YOURMATADOR/nodethings#readme",
   "devDependencies": {
-    "nodemon": "^1.18.9"
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.1",
+    "node-sass": "^4.11.0",
+    "nodemon": "^1.18.9",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "@sendgrid/mail": "^6.3.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "bootstrap": "^4.3.1",
     "cookie-parser": "^1.4.3",
     "csurf": "^1.9.0",
     "ejs": "^2.6.1",
@@ -45,15 +63,20 @@
     "express-session": "^1.15.6",
     "express-validator": "^5.3.1",
     "flash": "^1.1.0",
+    "font-awesome": "^4.7.0",
     "handlebars": "^4.1.0",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
+    "mini-css-extract-plugin": "^0.5.0",
     "moment": "^2.24.0",
     "mongodb": "^3.1.13",
     "mongoose": "^5.4.7",
     "multer": "^1.4.1",
     "pdfkit": "^0.9.0",
     "pug": "^2.0.3",
+    "react": "^16.8.4",
+    "react-bootstrap": "^1.0.0-beta.5",
+    "react-dom": "^16.8.4",
     "superagent": "^4.1.0",
     "validator": "^10.11.0"
   }
