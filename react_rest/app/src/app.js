@@ -6,7 +6,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faSpinner)
 
-
+//
 import { Nav } from "./components/nav";
 import { Post_form } from "./components/post_form";
 import { Posts } from "./components/posts";
