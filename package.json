@@ -86,6 +86,6 @@
     "react-dom": "^16.8.4",
     "redux": "^4.0.1",
     "superagent": "^4.1.0",
-    "validator": "^10.11.0"
+    "validator": "^13.7.0"
   }
 }
